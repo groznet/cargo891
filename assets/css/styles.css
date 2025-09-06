@@ -14,3 +14,7 @@ body {
 .testimonial-transition {
     transition: opacity 0.5s ease-in-out;
 }
+
+#mainmenu i {
+    font-size: 12px;
+}
