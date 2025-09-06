@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru" x-data="{ 
+    mobileMenuOpen: false, 
+    servicesDropdownOpen: false, 
+    blogDropdownOpen: false,
+    currentLanguage: 'ru',
+    activeService: 'shipping'
+  }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - Cargo891 - Логистика и доставка грузов из Китая</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1d4ed8',
+                        secondary: '#0e7490',
+                        accent: '#ea580c',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .service-image {
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+        .nav-item.active {
+            color: #1d4ed8;
+            border-bottom: 2px solid #1d4ed8;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header-wrapper" class="bg-white shadow-md sticky top-0 z-50"></header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-r from-blue-800 to-primary">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Наши услуги</h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Полный комплекс логистических решений для вашего бизнеса. От поиска поставщика до доставки "до двери".</p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <a href="#services" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Смотреть услуги</a>
+                        <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-6 rounded-lg transition-all duration-300">Получить консультацию</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Navigation -->
+        <section id="services-nav" class="py-8 bg-white shadow-sm sticky top-16 z-30">
+            <div class="container mx-auto px-4">
+                <div class="flex overflow-x-auto scrollbar-hide space-x-6">
+                    <a href="#logistics" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'logistics' }">Логистика</a>
+                    <a href="#shipping" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'shipping' }">Доставка</a>
+                    <a href="#storage" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'storage' }">Хранение</a>
+                    <a href="#product-search" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'product-search' }">Поиск товара</a>
+                    <a href="#factory-finding" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'factory-finding' }">Найти фабрику</a>
+                    <a href="#money-transfer" class="nav-item whitespace-nowrap py-2 font-medium text-gray-700 hover:text-primary transition-colors duration-300" :class="{ 'active': activeService === 'money-transfer' }">Перевод денег</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <!-- Logistics Service -->
+                <div id="logistics" class="scroll-mt-24 mb-20">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Полный комплекс</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Логистика</h2>
+                            <p class="text-gray-600 mb-6">Полный комплекс логистических услуг: от планирования маршрутов до управления цепочками поставок.</p>
+                            <p class="text-gray-600 mb-8">Наши эксперты разрабатывают оптимальные логистические решения, учитывая особенности вашего бизнеса, сроки и бюджет. Мы берем на себя все этапы — от разработки маршрута до контроля выполнения поставки.</p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Разработка оптимальных логистических схем</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Управление цепочками поставок</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Мультимодальные перевозки</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Контроль и отслеживание на всех этапах</span>
+                                </li>
+                            </ul>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Обсудить проект
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Service -->
+                <div id="shipping" class="scroll-mt-24 mb-20">
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Быстро и надежно</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Доставка</h2>
+                            <p class="text-gray-600 mb-6">Быстрая и надежная доставка грузов из Китая любым транспортом: авиа, море, ж/д или авто.</p>
+                            <p class="text-gray-600 mb-8">Мы предлагаем все виды транспортных решений для доставки ваших грузов из Китая. Подберем оптимальный вариант по соотношению скорость/стоимость в зависимости от ваших потребностей.</p>
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-plane"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Авиадоставка</h4>
+                                    <p class="text-gray-600 text-sm">5-10 дней, от 1 кг</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-ship"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Морские перевозки</h4>
+                                    <p class="text-gray-600 text-sm">35-45 дней, контейнерные</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-train"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Железнодорожные</h4>
+                                    <p class="text-gray-600 text-sm">18-25 дней, от 100 кг</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Автоперевозки</h4>
+                                    <p class="text-gray-600 text-sm">20-30 дней, от 100 кг</p>
+                                </div>
+                            </div>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Рассчитать стоимость
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Service -->
+                <div id="storage" class="scroll-mt-24 mb-20">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Безопасное хранение</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Хранение</h2>
+                            <p class="text-gray-600 mb-6">Современные складские помещения с контролем температуры и влажности для любых типов грузов.</p>
+                            <p class="text-gray-600 mb-8">Наши склады оборудованы системами климат-контроля, видеонаблюдения и охраны. Мы предлагаем различные варианты хранения в зависимости от характеристик вашего груза.</p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Климат-контроль для чувствительных товаров</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Круглосуточная охрана и видеонаблюдение</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Система управления складом (WMS)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Помещения разных категорий (A, B, C)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Погрузочно-разгрузочные работы</span>
+                                </li>
+                            </ul>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Забронировать место
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Search Service -->
+                <div id="product-search" class="scroll-mt-24 mb-20">
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Надежные поставщики</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Поиск товара</h2>
+                            <p class="text-gray-600 mb-6">Помощь в поиске надежных поставщиков и качественных товаров на китайских торговых площадках.</p>
+                            <p class="text-gray-600 mb-8">Наши эксперты помогут найти проверенных поставщиков на популярных китайских площадках: 1688.com, Taobao, Tmall и других. Мы берем на себя переговоры, проверку качества и организацию закупок.</p>
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Поиск поставщиков</h4>
+                                    <p class="text-gray-600 text-sm">Поиск и проверка надежных поставщиков</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Контроль качества</h4>
+                                    <p class="text-gray-600 text-sm">Проверка товара перед отправкой</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-file-contract"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Ведение переговоров</h4>
+                                    <p class="text-gray-600 text-sm">Переговоры с поставщиками на китайском</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Организация закупок</h4>
+                                    <p class="text-gray-600 text-sm">Полный цикл закупочной деятельности</p>
+                                </div>
+                            </div>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Найти товар
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factory Finding Service -->
+                <div id="factory-finding" class="scroll-mt-24 mb-20">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Прямые контакты</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Найти фабрику</h2>
+                            <p class="text-gray-600 mb-6">Поиск производителей в Китае, проверка фабрик и организация производства под ваши требования.</p>
+                            <p class="text-gray-600 mb-8">Мы находим производителей в Китае, которые могут изготовить продукцию по вашим спецификациям. Организуем проверку фабрик, контроль производства и качества готовой продукции.</p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Поиск фабрик по специализации и возможностям</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Аудит фабрик (проверка мощностей, лицензий, сертификатов)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Переговоры и согласование условий производства</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Контроль производственного процесса</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-600">Инспекция качества готовой продукции</span>
+                                </li>
+                            </ul>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Найти производителя
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Money Transfer Service -->
+                <div id="money-transfer" class="scroll-mt-24">
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full mb-4">Безопасные расчеты</span>
+                            <h2 class="text-3xl font-bold text-dark mb-6">Перевод денег</h2>
+                            <p class="text-gray-600 mb-6">Безопасные денежные переводы в Китай для расчетов с поставщиками с минимальными комиссиями.</p>
+                            <p class="text-gray-600 mb-8">Мы обеспечиваем безопасный перевод средств для расчетов с китайскими поставщиками. Наши партнерские отношения с банками позволяют предлагать выгодные условия и минимальные комиссии.</p>
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Низкие комиссии</h4>
+                                    <p class="text-gray-600 text-sm">От 0.5% за перевод</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Безопасность</h4>
+                                    <p class="text-gray-600 text-sm">Гарантия сохранности средств</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">Скорость</h4>
+                                    <p class="text-gray-600 text-sm">Переводы в течение 1-2 дней</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-3">
+                                        <i class="fas fa-yuan-sign"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-dark mb-2">В юанях и долларах</h4>
+                                    <p class="text-gray-600 text-sm">Переводы в разных валютах</p>
+                                </div>
+                            </div>
+                            <a href="/contact" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                Отправить перевод
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2">
+                            <div class="service-card rounded-xl overflow-hidden">
+                                <div class="service-image h-96 bg-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="py-16 bg-primary text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-6">Готовы начать сотрудничество?</h2>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8">Наши специалисты подберут оптимальное решение для вашего бизнеса и рассчитают стоимость услуг</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
+                    <a href="tel:+78001234567" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Позвонить</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Script to handle service navigation and active states
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceSections = document.querySelectorAll('[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            // Function to update active nav item
+            function updateActiveNav() {
+                let currentSection = '';
+                
+                serviceSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop - 100) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').substring(1) === currentSection) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial update
+            updateActiveNav();
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveNav);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru" x-data="{ 
+    mobileMenuOpen: false, 
+    servicesDropdownOpen: false, 
+    blogDropdownOpen: false,
+    currentLanguage: 'ru',
+    activeSection: '1'
+  }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользовательское соглашение - Cargo891 - Логистика и доставка грузов из Китая</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1d4ed8',
+                        secondary: '#0e7490',
+                        accent: '#ea580c',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .terms-nav-item {
+            transition: all 0.3s ease;
+        }
+        .terms-nav-item.active, .terms-nav-item:hover {
+            background-color: #f3f4f6;
+            border-left: 4px solid #1d4ed8;
+        }
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .section-content.open {
+            max-height: 5000px;
+        }
+        .back-to-top {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header-wrapper" class="bg-white shadow-md sticky top-0 z-50"></header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-r from-blue-800 to-primary">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Пользовательское соглашение</h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Официальные правила использования услуг Cargo891. Внимательно ознакомьтесь с условиями перед началом сотрудничества.</p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <a href="#last-updated" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Последнее обновление</a>
+                        <a href="#contact-questions" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-6 rounded-lg transition-all duration-300">Вопросы</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms Content -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <!-- Navigation -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-gray-50 rounded-xl p-6 sticky top-32">
+                            <h3 class="text-xl font-bold text-dark mb-6">Содержание</h3>
+                            <nav class="space-y-2">
+                                <a href="#1" @click="activeSection = '1'" :class="{'terms-nav-item active': activeSection === '1', 'terms-nav-item': activeSection !== '1'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">1.</span> Общие положения
+                                </a>
+                                <a href="#2" @click="activeSection = '2'" :class="{'terms-nav-item active': activeSection === '2', 'terms-nav-item': activeSection !== '2'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">2.</span> Условия предоставления услуг
+                                </a>
+                                <a href="#3" @click="activeSection = '3'" :class="{'terms-nav-item active': activeSection === '3', 'terms-nav-item': activeSection !== '3'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">3.</span> Права и обязанности сторон
+                                </a>
+                                <a href="#4" @click="activeSection = '4'" :class="{'terms-nav-item active': activeSection === '4', 'terms-nav-item': activeSection !== '4'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">4.</span> Оплата услуг
+                                </a>
+                                <a href="#5" @click="activeSection = '5'" :class="{'terms-nav-item active': activeSection === '5', 'terms-nav-item': activeSection !== '5'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">5.</span> Ответственность сторон
+                                </a>
+                                <a href="#6" @click="activeSection = '6'" :class="{'terms-nav-item active': activeSection === '6', 'terms-nav-item': activeSection !== '6'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">6.</span> Конфиденциальность
+                                </a>
+                                <a href="#7" @click="activeSection = '7'" :class="{'terms-nav-item active': activeSection === '7', 'terms-nav-item': activeSection !== '7'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">7.</span> Разрешение споров
+                                </a>
+                                <a href="#8" @click="activeSection = '8'" :class="{'terms-nav-item active': activeSection === '8', 'terms-nav-item': activeSection !== '8'}" class="block py-3 px-4 rounded-lg text-dark font-medium">
+                                    <span class="mr-2">8.</span> Заключительные положения
+                                </a>
+                            </nav>
+
+                            <div class="mt-8 pt-6 border-t border-gray-200">
+                                <div class="flex items-center">
+                                    <i class="far fa-file-pdf text-primary text-2xl mr-3"></i>
+                                    <a href="#" class="text-primary font-semibold hover:underline">Скачать PDF версию</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-3/4">
+                        <!-- Last Updated -->
+                        <div id="last-updated" class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-12">
+                            <div class="flex items-start">
+                                <i class="fas fa-info-circle text-blue-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-bold text-dark mb-2">Последнее обновление</h3>
+                                    <p class="text-gray-700">Данная версия пользовательского соглашения была опубликована и вступила в силу <span class="font-semibold">15 мая 2023 года</span>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 1 -->
+                        <div id="1" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">1</div>
+                                <h2 class="text-2xl font-bold text-dark">Общие положения</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует отношения между ООО «Карго891» (далее — «Компания») и физическим или юридическим лицом (далее — «Пользователь») по использованию услуг, предоставляемых Компанией.</p>
+                                    <p class="mb-4">1.2. Используя услуги Компании, Пользователь подтверждает, что полностью ознакомился и соглашается с условиями настоящего Соглашения.</p>
+                                    <p class="mb-4">1.3. Настоящее Соглашение является публичной офертой в соответствии со статьей 437 Гражданского кодекса Российской Федерации.</p>
+                                    <p class="mb-4">1.4. Компания оставляет за собой право вносить изменения в настоящее Соглашение в одностороннем порядке. Изменения вступают в силу с момента их публикации на сайте cargo891.ru.</p>
+                                    <p>1.5. Пользователь обязуется самостоятельно отслеживать изменения в Соглашении. Продолжение использования услуг после внесения изменений означает согласие с ними.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2 -->
+                        <div id="2" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">2</div>
+                                <h2 class="text-2xl font-bold text-dark">Условия предоставления услуг</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">2.1. Компания предоставляет Пользователю следующие услуги:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Организация доставки грузов из Китая в Россию и другие страны;</li>
+                                        <li class="mb-2">Складирование и хранение грузов;</li>
+                                        <li class="mb-2">Выкуп товаров у китайских поставщиков;</li>
+                                        <li class="mb-2">Таможенное оформление грузов;</li>
+                                        <li class="mb-2">Страхование грузов;</li>
+                                        <li>Консультационные услуги по вопросам логистики.</li>
+                                    </ul>
+                                    <p class="mb-4">2.2. Для начала использования услуг Пользователь должен:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Зарегистрироваться на сайте cargo891.ru или связаться с менеджером Компании;</li>
+                                        <li class="mb-2">Предоставить необходимую информацию о грузе;</li>
+                                        <li class="mb-2">Принять оферту и условия сотрудничества;</li>
+                                        <li>Оплатить услуги в соответствии с выбранным тарифом.</li>
+                                    </ul>
+                                    <p class="mb-4">2.3. Компания вправе отказать в предоставлении услуг без объяснения причин.</p>
+                                    <p>2.4. Условия предоставления каждой конкретной услуги могут быть дополнительно оговорены в отдельном договоре или дополнении к настоящему Соглашению.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3 -->
+                        <div id="3" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">3</div>
+                                <h2 class="text-2xl font-bold text-dark">Права и обязанности сторон</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4 font-semibold">3.1. Права и обязанности Компании:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Обеспечивать надлежащее качество предоставляемых услуг;</li>
+                                        <li class="mb-2">Соблюдать конфиденциальность информации, полученной от Пользователя;</li>
+                                        <li class="mb-2">Информировать Пользователя об изменениях в условиях предоставления услуг;</li>
+                                        <li class="mb-2">Взимать плату за оказанные услуги в соответствии с установленными тарифами;</li>
+                                        <li>Приостанавливать оказание услуг в случае нарушения Пользователем условий Соглашения.</li>
+                                    </ul>
+                                    <p class="mb-4 font-semibold">3.2. Права и обязанности Пользователя:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Своевременно оплачивать услуги Компании;</li>
+                                        <li class="mb-2">Предоставлять достоверную информацию о грузе и его характеристиках;</li>
+                                        <li class="mb-2">Соблюдать таможенное законодательство стран отправления и назначения;</li>
+                                        <li class="mb-2">Не передавать для перевозки запрещенные товары;</li>
+                                        <li class="mb-2">Своевременно предоставлять необходимые документы для таможенного оформления;</li>
+                                        <li>Обеспечить возможность доставки груза в указанное время и место.</li>
+                                    </ul>
+                                    <p>3.3. Пользователь несет ответственность за достоверность предоставленной информации и документов.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4 -->
+                        <div id="4" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">4</div>
+                                <h2 class="text-2xl font-bold text-dark">Оплата услуг</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">4.1. Стоимость услуг определяется на основании действующих тарифов Компании, которые публикуются на сайте cargo891.ru.</p>
+                                    <p class="mb-4">4.2. Компания вправе изменять тарифы в одностороннем порядке. Изменения вступают в силу после публикации на сайте.</p>
+                                    <p class="mb-4">4.3. Оплата услуг осуществляется в российских рублях или другой валюте по согласованию с Компанией.</p>
+                                    <p class="mb-4">4.4. Предоплата составляет не менее 30% от общей стоимости услуг, если иное не оговорено дополнительно.</p>
+                                    <p class="mb-4">4.5. В случае изменения обстоятельств, влияющих на стоимость услуг (изменение курса валют, таможенных пошлин, транспортных расходов), Компания вправе пересчитать стоимость услуг.</p>
+                                    <p>4.6. При несвоевременной оплате услуг Компания вправе приостановить выполнение обязательств до момента полного погашения задолженности.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 5 -->
+                        <div id="5" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">5</div>
+                                <h2 class="text-2xl font-bold text-dark">Ответственность сторон</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">5.1. Компания несет ответственность за сохранность груза с момента его принятия на склад в стране отправления до момента передачи получателю в стране назначения.</p>
+                                    <p class="mb-4">5.2. Компания не несет ответственности за:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Задержки, вызванные действиями таможенных органов;</li>
+                                        <li class="mb-2">Задержки, связанные с форс-мажорными обстоятельствами;</li>
+                                        <li class="mb-2">Повреждение груза, вызванное его естественными свойствами;</li>
+                                        <li>Нарушение сроков доставки по вине Пользователя.</li>
+                                    </ul>
+                                    <p class="mb-4">5.3. Пользователь несет ответственность за:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Достоверность предоставленной информации о грузе;</li>
+                                        <li class="mb-2">Соблюдение таможенного законодательства;</li>
+                                        <li class="mb-2">Своевременную оплату услуг;</li>
+                                        <li>Нарушение условий настоящего Соглашения.</li>
+                                    </ul>
+                                    <p>5.4. Стороны освобождаются от ответственности за неисполнение обязательств, если оно вызвано обстоятельствами непреодолимой силы (форс-мажор).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 6 -->
+                        <div id="6" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">6</div>
+                                <h2 class="text-2xl font-bold text-dark">Конфиденциальность</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">6.1. Компания обязуется не разглашать конфиденциальную информацию, полученную от Пользователя в процессе оказания услуг.</p>
+                                    <p class="mb-4">6.2. Компания вправе использовать информацию о Пользователе для:</p>
+                                    <ul class="list-disc pl-5 mb-4">
+                                        <li class="mb-2">Исполнения обязательств по настоящему Соглашению;</li>
+                                        <li class="mb-2">Информирования о новых услугах и акциях;</li>
+                                        <li>Улучшения качества предоставляемых услуг.</li>
+                                    </ul>
+                                    <p class="mb-4">6.3. Компания принимает все необходимые меры для защиты персональных данных Пользователя в соответствии с Федеральным законом №152-ФЗ «О персональных данных».</p>
+                                    <p>6.4. Пользователь дает согласие на обработку своих персональных данных для целей исполнения настоящего Соглашения.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 7 -->
+                        <div id="7" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">7</div>
+                                <h2 class="text-2xl font-bold text-dark">Разрешение споров</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">7.1. Все споры и разногласия, возникающие из настоящего Соглашения или в связи с ним, подлежат разрешению путем переговоров между сторонами.</p>
+                                    <p class="mb-4">7.2. В случае невозможности разрешения спора путем переговоров, он подлежит разрешению в арбитражном суде по месту нахождения Компании.</p>
+                                    <p>7.3. Претензионный порядок разрешения споров является обязательным. Срок рассмотрения претензии - 30 календарных дней с момента ее получения.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 8 -->
+                        <div id="8" class="mb-12">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-4">8</div>
+                                <h2 class="text-2xl font-bold text-dark">Заключительные положения</h2>
+                            </div>
+                            <div class="section-content open">
+                                <div class="prose max-w-none text-gray-700">
+                                    <p class="mb-4">8.1. Настоящее Соглашение вступает в силу с момента его принятия Пользователем и действует до полного исполнения обязательств сторонами.</p>
+                                    <p class="mb-4">8.2. Все изменения и дополнения к настоящему Соглашению действительны только в случае их оформления в письменной форме и подписания обеими сторонами.</p>
+                                    <p class="mb-4">8.3. Если какое-либо положение настоящего Соглашения будет признано недействительным, это не повлияет на действительность остальных положений.</p>
+                                    <p>8.4. Во всем остальном, что не предусмотрено настоящим Соглашением, стороны руководствуются действующим законодательством Российской Федерации.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact for Questions -->
+                        <div id="contact-questions" class="bg-gray-50 rounded-xl p-8 mb-12">
+                            <h3 class="text-xl font-bold text-dark mb-4">Остались вопросы?</h3>
+                            <p class="text-gray-700 mb-6">Если у вас есть вопросы относительно нашего Пользовательского соглашения, свяжитесь с нами:</p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="mailto:legal@cargo891.ru" class="inline-flex items-center text-primary font-semibold hover:underline">
+                                    <i class="far fa-envelope mr-2"></i> legal@cargo891.ru
+                                </a>
+                                <a href="tel:+78001234567" class="inline-flex items-center text-primary font-semibold hover:underline">
+                                    <i class="fas fa-phone-alt mr-2"></i> +7 (800) 123-45-67
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Acceptance -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-bold text-dark mb-2">Принятие соглашения</h3>
+                                    <p class="text-gray-700">Используя услуги Cargo891, вы подтверждаете, что ознакомились с условиями настоящего Пользовательского соглашения и принимаете их в полном объеме.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Simple script to handle back to top button
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
