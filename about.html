@@ -69,9 +69,11 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-r from-blue-800 to-primary">
+        <section class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-r from-blue-800 to-primary" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <!-- Gradient + SVG overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
             <div class="absolute inset-0 opacity-20">
-                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
             </div>
             <div class="container mx-auto px-4 relative z-10">
                 <div class="flex flex-col lg:flex-row items-center">
@@ -86,7 +88,7 @@
                     <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center floating">
                         <div class="relative">
                             <div class="absolute -inset-4 bg-primary rounded-xl opacity-20 blur-lg"></div>
-                            <img src="https://images.unsplash.com/photo-1563720223880-4d93eef1f1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Наш склад" class="relative rounded-xl shadow-2xl w-full max-w-md">
+                            <img src="assets/images/warehouse.jpg" alt="Наш склад" class="relative rounded-xl shadow-2xl w-full max-w-md">
                         </div>
                     </div>
                 </div>
@@ -440,7 +442,7 @@
                 </div>
                 
                 <div class="text-center mt-12">
-                    <a href="/careers" class="inline-flex items-center text-primary font-semibold hover:underline">
+                    <a href="/contact.html" class="inline-flex items-center text-primary font-semibold hover:underline">
                         Присоединиться к нашей команде
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -449,16 +451,19 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-primary text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-6">Готовы начать работать с нами?</h2>
-                <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8">Присоединяйтесь к тысячам довольных клиентов, которые уже используют наши логистические услуги</p>
+        <section class="relative py-16 bg-primary text-white" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-blue-800 opacity-80"></div>
+
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-3xl font-bold mb-6 text-white">Готовы начать работать с нами?</h2>
+                <p class="text-xl text-white max-w-2xl mx-auto mb-8">Присоединяйтесь к тысячам довольных клиентов, которые уже используют наши логистические услуги</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/contact" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
-                    <a href="/services" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
+                    <a href="/contact.html" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
+                    <a href="/services.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->

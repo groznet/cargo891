@@ -42,10 +42,11 @@
     <main>
 
         <!-- Hero section -->
-        <section class="relative bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden" x-data="{ currentSlide: 0, slideTotal: 3, direction: 'right' }">
-            <!-- Background pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <section class="relative bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden" x-data="{ currentSlide: 0, slideTotal: 3, direction: 'right' }" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <!-- Gradient + SVG overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
             </div>
 
             <!-- Slider container -->
@@ -56,15 +57,15 @@
                     <div x-show="currentSlide === 0" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-x-8" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-8" class="flex flex-col lg:flex-row items-center">
                         <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 lg:pr-12">
                             <span class="inline-block bg-blue-500 bg-opacity-20 text-sm font-semibold py-1 px-3 rounded-full mb-4">Доверяют с 2012</span>
-                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">Глобальные логистические решения</h1>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">Глобальные решения по логистике</h1>
                             <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Эффективная, надежная доставка грузов по всему миру с отслеживанием в реальном времени и премиальным сервисом.</p>
                             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                                <a href="#quote" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Начать</a>
-                                <a href="#services" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Узнать больше</a>
+                                <a href="/contact.html" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Начать</a>
+                                <a href="/about.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Узнать больше</a>
                             </div>
                         </div>
                         <div class="lg:w-1/2 flex justify-center">
-                            <img src="assets/images/https://images.unsplash.com/photo-1601055927471-1fe7a5a133ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Доставка грузов" class="rounded-xl shadow-2xl w-full max-w-md">
+                            <img src="assets/images/services/shipping.jpg" alt="Доставка грузов" class="rounded-xl shadow-2xl w-full max-w-md">
                         </div>
                     </div>
 
@@ -72,15 +73,15 @@
                     <div x-show="currentSlide === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-x-8" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-8" class="flex flex-col lg:flex-row items-center">
                         <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 lg:pr-12">
                             <span class="inline-block bg-blue-500 bg-opacity-20 text-sm font-semibold py-1 px-3 rounded-full mb-4">Быстро и безопасно</span>
-                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">Экспресс-доставка</h1>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">Экспресс-доставка в быстрые сроки</h1>
                             <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Приоритетные варианты доставки с гарантированными сроками и премиальной обработкой.</p>
                             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                                <a href="#quote" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Запросить расчет</a>
-                                <a href="#services" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
+                                <a href="/contact.html" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Запросить расчет</a>
+                                <a href="/services.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
                             </div>
                         </div>
                         <div class="lg:w-1/2 flex justify-center">
-                            <img src="assets/images/https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Экспресс-доставка" class="rounded-xl shadow-2xl w-full max-w-md">
+                            <img src="assets/images/services/logistics.jpg" alt="Экспресс-доставка" class="rounded-xl shadow-2xl w-full max-w-md">
                         </div>
                     </div>
 
@@ -89,14 +90,14 @@
                         <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 lg:pr-12">
                             <span class="inline-block bg-blue-500 bg-opacity-20 text-sm font-semibold py-1 px-3 rounded-full mb-4">Складские решения</span>
                             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">Умные складские помещения</h1>
-                            <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Современные склады с контролем климата и продвинутым управлением запасами.</p>
+                            <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Современные склады с контролем климата и умным управлением запасами. Мы обеспечиваем оптимальные условия хранения.</p>
                             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                                <a href="#quote" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Забронировать место</a>
-                                <a href="#services" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть виртуальный тур</a>
+                                <a href="/contact.html" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">Забронировать место</a>
+                                <a href="" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть виртуальный тур</a>
                             </div>
                         </div>
                         <div class="lg:w-1/2 flex justify-center">
-                            <img src="assets/images/https://images.unsplash.com/photo-1563720223880-4d93eef1f1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Складское хранение" class="rounded-xl shadow-2xl w-full max-w-md">
+                            <img src="assets/images/services/storage.jpg" alt="Складское хранение" class="rounded-xl shadow-2xl w-full max-w-md">
                         </div>
                     </div>
                 </div>
@@ -321,7 +322,7 @@
 
                 <!-- CTA Button -->
                 <div class="text-center mt-12">
-                    <a href="/contact" class="inline-block bg-primary hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition duration-300">
+                    <a href="/contact.html" class="inline-block bg-primary hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition duration-300">
                         Получить консультацию
                     </a>
                 </div>
