@@ -324,31 +324,26 @@
                 </div>
 
                 <!-- Grid View -->
-                <div x-show="testimonialView === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div x-show="testimonialView === 'grid'" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                     <!-- Review items would be dynamically loaded here -->
                     <!-- Using placeholder divs for demonstration -->
-                    <template x-for="i in 12">
+                    <template x-for="i in 49">
                         <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden">
+                            <!-- Image -->
                             <div class="relative overflow-hidden">
-                                <div class="h-64 bg-gray-200 testimonial-image"></div>
-                                <div class="review-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center">
-                                    <button class="bg-white text-primary w-12 h-12 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                </div>
+                                <img :src="`assets/images/reviews/${i}.jpg`" 
+                                    :alt="`Отзыв ${i}`" 
+                                    class="w-full h-64 object-contain bg-gray-200">
                             </div>
-                            <div class="p-6">
-                                <div class="flex text-yellow-400 mb-3">
+
+                            <!-- Stars -->
+                            <div class="p-4 flex justify-center">
+                                <div class="flex text-yellow-400">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-gray-600 text-sm mb-4">"Отличный сервис, быстрая доставка. Рекомендую!"</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-gray-500">15 мая 2023</span>
-                                    <span class="text-sm font-medium text-primary">Читать полностью</span>
                                 </div>
                             </div>
                         </div>
