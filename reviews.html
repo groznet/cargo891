@@ -363,36 +363,34 @@
                 </div>
 
                 <!-- Masonry View -->
-                <div x-show="testimonialView === 'masonry'" class="masonry-grid">
-                    <!-- Review items would be dynamically loaded here -->
-                    <!-- Using placeholder divs for demonstration -->
+                <div x-show="testimonialView === 'masonry'" class="masonry-grid" x-data="{ activeImage: null }">
                     <template x-for="i in 18">
-                        <div class="masonry-item testimonial-card bg-gray-50 rounded-xl overflow-hidden">
-                            <div class="relative overflow-hidden">
-                                <div class="h-64 bg-gray-200 testimonial-image"></div>
-                                <div class="review-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center">
-                                    <button class="bg-white text-primary w-12 h-12 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <div class="flex text-yellow-400 mb-3">
+                        <div class="masonry-item testimonial-card rounded-xl overflow-hidden cursor-pointer"
+                            @click="activeImage = `assets/images/reviews/${i}.jpg`">
+                            <img :src="`assets/images/reviews/${i}.jpg`"
+                                :alt="`Отзыв ${i}`"
+                                class="w-full object-cover rounded-xl">
+                            <div class="p-3 flex justify-center">
+                                <div class="flex text-yellow-400">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-gray-600 text-sm mb-4">"Отличный сервис, быстрая доставка. Рекомендую!"</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-gray-500">15 мая 2023</span>
-                                    <span class="text-sm font-medium text-primary">Читать полностью</span>
                                 </div>
                             </div>
                         </div>
                     </template>
+
+                    <!-- Modal for Zoom -->
+                    <div x-show="activeImage" 
+                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                        @click="activeImage = null"
+                        x-transition>
+                        <img :src="activeImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                    </div>
                 </div>
+
 
                 <!-- Load More Button -->
                 <div class="text-center mt-12">
