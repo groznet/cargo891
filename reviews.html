@@ -324,30 +324,42 @@
                 </div>
 
                 <!-- Grid View -->
-                <div x-show="testimonialView === 'grid'" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                    <!-- Review items would be dynamically loaded here -->
-                    <!-- Using placeholder divs for demonstration -->
-                    <template x-for="i in 49">
-                        <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden">
-                            <!-- Image -->
-                            <div class="relative overflow-hidden">
-                                <img :src="`assets/images/reviews/${i}.jpg`" 
-                                    :alt="`Отзыв ${i}`" 
-                                    class="w-full h-64 object-contain bg-gray-200">
-                            </div>
+                <div x-data="{ selectedImage: null }">
+                    <div x-show="testimonialView === 'grid'" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <template x-for="i in 49">
+                            <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
+                                <!-- Image -->
+                                <div class="relative overflow-hidden">
+                                    <img :src="`assets/images/reviews/${i}.jpg`" 
+                                        :alt="`Отзыв ${i}`" 
+                                        class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
+                                        @click="selectedImage = `assets/images/reviews/${i}.jpg`">
+                                </div>
 
-                            <!-- Stars -->
-                            <div class="p-4 flex justify-center">
-                                <div class="flex text-yellow-400">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                <!-- Stars -->
+                                <div class="p-4 flex justify-center">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </template>
+                        </template>
+                    </div>
+
+                    <!-- Lightbox -->
+                    <div x-show="selectedImage" 
+                        x-transition 
+                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                        @click="selectedImage = null">
+                        <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                        <button class="absolute top-6 right-6 text-white text-3xl" @click.stop="selectedImage = null">
+                            &times;
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Masonry View -->
