@@ -158,7 +158,64 @@
         </section>
         <!-- End: Hero section -->
 
-       <!-- Key Services Overview -->
+        <!-- Testimonials -->
+        <section class="py-16 testimonial-bg">
+            <div class="container mx-auto px-4">
+                <div x-data="{
+                        images: [],
+                        selectedImage: null,
+                        async init() {
+                            const res = await fetch('data/reviews.json');
+                            const data = await res.json();
+                            // newest first
+                            this.images = data.images.reverse().slice(0, 10);
+                        }
+                    }"
+                >
+                    <!-- Heading -->
+                    <div class="flex justify-between items-center mb-12 text-center">
+                        <h2 class="text-3xl font-bold text-dark ">Что клиенты говорят</h2>
+                    </div>
+
+                    <!-- Grid (10 images, 5+5) -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <template x-for="i in images" :key="i">
+                            <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
+                                <div class="relative overflow-hidden">
+                                    <img :src="`assets/images/reviews/${i}.jpg`"
+                                        :alt="`Отзыв ${i}`"
+                                        class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
+                                        @click="selectedImage = `assets/images/reviews/${i}.jpg`">
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Lightbox -->
+                    <div x-show="selectedImage"
+                        x-transition
+                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                        @click="selectedImage = null">
+                        <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                        <button class="absolute top-6 right-6 text-white text-3xl" 
+                                @click.stop="selectedImage = null">
+                            &times;
+                        </button>
+                    </div>
+
+                    <!-- View All Button -->
+                    <div class="text-center mt-8">
+                        <a href="reviews.html" 
+                        class="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+                            Смотреть все отзывы
+                        </a>
+                    </div>
+                </div>
+               
+            </div>
+        </section>
+
+        <!-- Key Services Overview -->
         <section class="py-16 bg-gray-50" x-data="{ activeTab: 'all' }">
             <div class="container mx-auto px-4">
                 <!-- Section Heading -->
@@ -347,6 +404,73 @@
             </style>
         </section>
 
+        <section id="team-short" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-4">Наша команда</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                    Познакомьтесь с ключевыми специалистами, которые помогают вам в логистике
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Яна -->
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="assets/images/staff/Яна.jpg" alt="Яна" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Яна</h3>
+                            <p class="text-primary font-medium mb-2">Директор</p>
+                            <p class="text-gray-600 text-sm">15+ лет в международной логистике. Основала Cargo891 в 2012 году.</p>
+                        </div>
+                    </div>
+
+                    <!-- Александр -->
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="assets/images/staff/Александр.jpg" alt="Александр" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Александр</h3>
+                            <p class="text-primary font-medium mb-2">Генеральный директор</p>
+                            <p class="text-gray-600 text-sm">Руководитель по оптимизации логистических процессов.</p>
+                        </div>
+                    </div>
+
+                    <!-- Настя -->
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="assets/images/staff/Настя.jpg" alt="Настя" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Настя</h3>
+                            <p class="text-primary font-medium mb-2">Операционный менеджер</p>
+                            <p class="text-gray-600 text-sm">Менеджер по работе с клиентами и сопровождению логистических услуг.</p>
+                        </div>
+                    </div>
+
+                    <!-- Андрей -->
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="assets/images/staff/Андрей.jpg" alt="Андрей" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Андрей</h3>
+                            <p class="text-primary font-medium mb-2">Специалист по упаковке</p>
+                            <p class="text-gray-600 text-sm">Специалист по упаковке, маркировке и подготовке грузов к отправке.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="/about.html" class="inline-flex items-center text-primary font-semibold hover:underline">
+                        Смотреть всех сотрудников
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- Why Choose Us -->
         <section class="py-16 bg-gray-100">
@@ -386,12 +510,32 @@
                                     <p class="text-gray-600">Соблюдаем оговоренные сроки с гарантией ответственности</p>
                                 </div>
                             </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-dark mb-1">Прозрачное отслеживание</h3>
+                                    <p class="text-gray-600">Вы всегда видите, где находится ваш груз благодаря онлайн-трекингу</p>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                     
-                    <div class="lg:w-1/2">
-                        <img src="assets/images/office-worker-1080x810.jpg" alt="Наш офис" class="rounded-lg shadow-lg">
+                    <div x-data="{ current: 0, images: ['assets/images/office-worker-1080x810.jpg', 'assets/images/about-us-1.jpg'] }"
+                        class="lg:w-1/2 relative rounded-lg overflow-hidden">
+
+                        <!-- Images -->
+                        <img :src="images[current]" alt="Наш офис" class="w-full h-auto rounded-lg transition-opacity duration-700">
+
+                        <!-- Next button -->
+                        <button @click="current = (current + 1) % images.length"
+                                class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-80">
+                            &#10095;
+                        </button>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -499,100 +643,6 @@
                 <div class="max-w-4xl mx-auto">
                     <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg shadow-lg overflow-hidden">
                         <iframe class="w-full h-96" src="https://www.youtube.com/embed/ewDtzPnNwyk" title="О компании Cargo891" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="py-16 testimonial-bg">
-            <div class="container mx-auto px-4">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <h2 class="text-3xl font-bold text-dark mb-4">Отзывы наших клиентов</h2>
-                    <p class="text-gray-600">Что говорят о нас наши клиенты</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
-                            <div>
-                                <h4 class="font-semibold">Анна Иванова</h4>
-                                <p class="text-sm text-gray-500">Интернет-магазин одежды</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Работаем с Cargo891 уже более 3 лет. Ни разу не было срывов по срокам. Всегда оперативно решают вопросы и предоставляют полную информацию по грузу."</p>
-                        <div class="flex mt-4">
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
-                            <div>
-                                <h4 class="font-semibold">Дмитрий Петров</h4>
-                                <p class="text-sm text-gray-500">Оптовые поставки</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Очень нравится сервис и индивидуальный подход. Персональный менеджер всегда на связи и готов помочь с любыми вопросами. Рекомендую!"</p>
-                        <div class="flex mt-4">
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
-                            <div>
-                                <h4 class="font-semibold">Ольга Сидорова</h4>
-                                <p class="text-sm text-gray-500">Магазин электроники</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Быстрая обработка заказов и доставка в срок. Цены адекватные, нет скрытых платежей. Удобный личный кабинет для отслеживания грузов."</p>
-                        <div class="flex mt-4">
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                            <i class="fas fa-star text-amber-400"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partners -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center text-dark mb-12">Наши партнеры</h2>
-                
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">GrozNet</span>
-                    </div>
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">Entegra</span>
-                    </div>
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">Nixtore</span>
-                    </div>
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">Husman</span>
-                    </div>
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">Dukhar</span>
-                    </div>
-                    <div class="bg-gray-100 h-24 flex items-center justify-center p-4 rounded-lg">
-                        <span class="text-gray-400 font-bold">Meelona</span>
                     </div>
                 </div>
             </div>

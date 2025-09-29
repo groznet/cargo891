@@ -295,72 +295,63 @@
         <section id="reviews" class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                    <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Галерея отзывов</h2>
-                    <div class="flex space-x-4">
-                        <div class="flex bg-gray-100 rounded-lg p-1">
-                            <button 
-                                @click="testimonialView = 'grid'" 
-                                :class="testimonialView === 'grid' ? 'bg-white text-primary shadow-sm' : 'text-gray-500'"
-                                class="px-4 py-2 rounded-md transition-colors duration-300"
-                            >
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button 
-                                @click="testimonialView = 'masonry'" 
-                                :class="testimonialView === 'masonry' ? 'bg-white text-primary shadow-sm' : 'text-gray-500'"
-                                class="px-4 py-2 rounded-md transition-colors duration-300"
-                            >
-                                <i class="fas fa-th-large"></i>
-                            </button>
-                        </div>
-                        <div class="relative">
-                            <select class="border border-gray-300 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option>Сначала новые</option>
-                                <option>Сначала старые</option>
-                                <option>С высоким рейтингом</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Grid View -->
-                <div x-data="{ selectedImage: null }">
-                    <div x-show="testimonialView === 'grid'" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        <template x-for="i in 49">
-                            <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
-                                <!-- Image -->
-                                <div class="relative overflow-hidden">
-                                    <img :src="`assets/images/reviews/${i}.jpg`" 
-                                        :alt="`Отзыв ${i}`" 
-                                        class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
-                                        @click="selectedImage = `assets/images/reviews/${i}.jpg`">
-                                </div>
+                    <div x-data="{
+                            images: [],
+                            selectedImage: null,
+                            sort: 'new',
+                            async init() {
+                                const res = await fetch('data/reviews.json');
+                                const data = await res.json();
+                                this.images = data.images;
+                            },
+                            get sortedImages() {
+                                return this.sort === 'new' 
+                                    ? [...this.images].reverse()   // newest first
+                                    : this.images;                // oldest first
+                            }
+                        }"
+                    >
 
-                                <!-- Stars -->
-                                <div class="p-4 flex justify-center">
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                            <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Галерея отзывов</h2>
+                            <div class="flex justify-end md:mt-0">
+                                <select x-model="sort" 
+                                        class="border border-gray-300 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="new">Сначала новые</option>
+                                    <option value="old">Сначала старые</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Grid -->
+                        <div x-show="testimonialView === 'grid'" 
+                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                            <template x-for="i in sortedImages" :key="i">
+                                <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
+                                    <div class="relative overflow-hidden">
+                                        <img :src="`assets/images/reviews/${i}.jpg`"
+                                            :alt="`Отзыв ${i}`"
+                                            class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
+                                            @click="selectedImage = `assets/images/reviews/${i}.jpg`">
                                     </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
+
+                        <!-- Lightbox -->
+                        <div x-show="selectedImage"
+                            x-transition
+                            class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                            @click="selectedImage = null">
+                            <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                            <button class="absolute top-6 right-6 text-white text-3xl" 
+                                    @click.stop="selectedImage = null">
+                                &times;
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Lightbox -->
-                    <div x-show="selectedImage" 
-                        x-transition 
-                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                        @click="selectedImage = null">
-                        <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
-                        <button class="absolute top-6 right-6 text-white text-3xl" @click.stop="selectedImage = null">
-                            &times;
-                        </button>
-                    </div>
-                </div>
 
                 <!-- Masonry View -->
                 <div x-show="testimonialView === 'masonry'" class="masonry-grid" x-data="{ activeImage: null }">
@@ -390,16 +381,75 @@
                         <img :src="activeImage" class="max-w-full max-h-full rounded-lg shadow-lg">
                     </div>
                 </div>
+            </div>
+        </section>
 
-
-                <!-- Load More Button -->
-                <div class="text-center mt-12">
-                    <button class="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">
-                        Загрузить еще
-                    </button>
+        <!-- Testimonials -->
+        <section class="py-16 testimonial-bg">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-4">Отзывы наших клиентов</h2>
+                    <p class="text-gray-600">Что говорят о нас наши клиенты</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
+                            <div>
+                                <h4 class="font-semibold">Анна Иванова</h4>
+                                <p class="text-sm text-gray-500">Интернет-магазин одежды</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Работаем с Cargo891 уже более 3 лет. Ни разу не было срывов по срокам. Всегда оперативно решают вопросы и предоставляют полную информацию по грузу."</p>
+                        <div class="flex mt-4">
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
+                            <div>
+                                <h4 class="font-semibold">Дмитрий Петров</h4>
+                                <p class="text-sm text-gray-500">Оптовые поставки</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Очень нравится сервис и индивидуальный подход. Персональный менеджер всегда на связи и готов помочь с любыми вопросами. Рекомендую!"</p>
+                        <div class="flex mt-4">
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-4" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="User"> <!-- Background circle --> <circle cx="24" cy="24" r="24" fill="#ccc"/> <!-- Head --> <circle cx="24" cy="16" r="7" fill="white"/> <!-- Body / shoulders --> <path d="M12 40c0-6.5 5-12 12-12s12 5.5 12 12" fill="white"/> </svg>
+                            <div>
+                                <h4 class="font-semibold">Ольга Сидорова</h4>
+                                <p class="text-sm text-gray-500">Магазин электроники</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Быстрая обработка заказов и доставка в срок. Цены адекватные, нет скрытых платежей. Удобный личный кабинет для отслеживания грузов."</p>
+                        <div class="flex mt-4">
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Add Review Section -->
         <section id="add-review" class="py-16 bg-gray-100">
