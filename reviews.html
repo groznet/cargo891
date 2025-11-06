@@ -17,24 +17,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отзывы - Cargo891 - Логистика и доставка грузов из Китая</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1d4ed8',
-                        secondary: '#0e7490',
-                        accent: '#ea580c',
-                        dark: '#1f2937'
-                    }
-                }
-            }
-        }
-    </script>
+    
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/output.css">
     <style>
         .testimonial-card {
             transition: all 0.3s ease;
@@ -124,6 +111,99 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Gallery Section -->
+        <section id="reviews" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+
+                    <div x-data="{
+                            images: [],
+                            selectedImage: null,
+                            sort: 'new',
+                            async init() {
+                                const res = await fetch('data/reviews.json');
+                                const data = await res.json();
+                                this.images = data.images;
+                            },
+                            get sortedImages() {
+                                return this.sort === 'new' 
+                                    ? [...this.images].reverse()   // newest first
+                                    : this.images;                // oldest first
+                            }
+                        }"
+                    >
+
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                            <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Галерея отзывов</h2>
+                            <div class="flex justify-end md:mt-0">
+                                <select x-model="sort" 
+                                        class="border border-gray-300 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="new">Сначала новые</option>
+                                    <option value="old">Сначала старые</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Grid -->
+                        <div x-show="testimonialView === 'grid'" 
+                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                            <template x-for="i in sortedImages" :key="i">
+                                <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
+                                    <div class="relative overflow-hidden">
+                                        <img :src="`assets/images/reviews/${i}.jpg`"
+                                            :alt="`Отзыв ${i}`"
+                                            class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
+                                            @click="selectedImage = `assets/images/reviews/${i}.jpg`">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Lightbox -->
+                        <div x-show="selectedImage"
+                            x-transition
+                            class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                            @click="selectedImage = null">
+                            <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                            <button class="absolute top-6 right-6 text-white text-3xl" 
+                                    @click.stop="selectedImage = null">
+                                &times;
+                            </button>
+                        </div>
+                    </div>
+
+
+                <!-- Masonry View -->
+                <div x-show="testimonialView === 'masonry'" class="masonry-grid" x-data="{ activeImage: null }">
+                    <template x-for="i in 18">
+                        <div class="masonry-item testimonial-card rounded-xl overflow-hidden cursor-pointer"
+                            @click="activeImage = `assets/images/reviews/${i}.jpg`">
+                            <img :src="`assets/images/reviews/${i}.jpg`"
+                                :alt="`Отзыв ${i}`"
+                                class="w-full object-cover rounded-xl">
+                            <div class="p-3 flex justify-center">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Modal for Zoom -->
+                    <div x-show="activeImage" 
+                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                        @click="activeImage = null"
+                        x-transition>
+                        <img :src="activeImage" class="max-w-full max-h-full rounded-lg shadow-lg">
                     </div>
                 </div>
             </div>
@@ -290,100 +370,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Reviews Gallery Section -->
-        <section id="reviews" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-
-                    <div x-data="{
-                            images: [],
-                            selectedImage: null,
-                            sort: 'new',
-                            async init() {
-                                const res = await fetch('data/reviews.json');
-                                const data = await res.json();
-                                this.images = data.images;
-                            },
-                            get sortedImages() {
-                                return this.sort === 'new' 
-                                    ? [...this.images].reverse()   // newest first
-                                    : this.images;                // oldest first
-                            }
-                        }"
-                    >
-
-                        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                            <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Галерея отзывов</h2>
-                            <div class="flex justify-end md:mt-0">
-                                <select x-model="sort" 
-                                        class="border border-gray-300 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
-                                    <option value="new">Сначала новые</option>
-                                    <option value="old">Сначала старые</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Grid -->
-                        <div x-show="testimonialView === 'grid'" 
-                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                            <template x-for="i in sortedImages" :key="i">
-                                <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden cursor-pointer">
-                                    <div class="relative overflow-hidden">
-                                        <img :src="`assets/images/reviews/${i}.jpg`"
-                                            :alt="`Отзыв ${i}`"
-                                            class="w-full h-64 object-contain bg-gray-200 transition-transform duration-300 hover:scale-105"
-                                            @click="selectedImage = `assets/images/reviews/${i}.jpg`">
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-
-                        <!-- Lightbox -->
-                        <div x-show="selectedImage"
-                            x-transition
-                            class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                            @click="selectedImage = null">
-                            <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
-                            <button class="absolute top-6 right-6 text-white text-3xl" 
-                                    @click.stop="selectedImage = null">
-                                &times;
-                            </button>
-                        </div>
-                    </div>
-
-
-                <!-- Masonry View -->
-                <div x-show="testimonialView === 'masonry'" class="masonry-grid" x-data="{ activeImage: null }">
-                    <template x-for="i in 18">
-                        <div class="masonry-item testimonial-card rounded-xl overflow-hidden cursor-pointer"
-                            @click="activeImage = `assets/images/reviews/${i}.jpg`">
-                            <img :src="`assets/images/reviews/${i}.jpg`"
-                                :alt="`Отзыв ${i}`"
-                                class="w-full object-cover rounded-xl">
-                            <div class="p-3 flex justify-center">
-                                <div class="flex text-yellow-400">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Modal for Zoom -->
-                    <div x-show="activeImage" 
-                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                        @click="activeImage = null"
-                        x-transition>
-                        <img :src="activeImage" class="max-w-full max-h-full rounded-lg shadow-lg">
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Testimonials -->
         <section class="py-16 testimonial-bg">
             <div class="container mx-auto px-4">

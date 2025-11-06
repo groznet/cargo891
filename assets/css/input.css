@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS variables for gradients */
+.to-primary {
+    --tw-gradient-to: #1d4ed8 var(--tw-gradient-to-position);
+}
+
+@layer base {
+    :root {
+        --color-primary: #1d4ed8;
+        --color-secondary: #0e7490;
+        --color-accent: #ea580c;
+        --color-dark: #1f2937;
+    }
+}
+
+@layer utilities {
+    .text-primary { color: var(--color-primary); }
+    .bg-primary { background-color: var(--color-primary); }
+    .text-secondary { color: var(--color-secondary); }
+    .bg-secondary { background-color: var(--color-secondary); }
+    .text-accent { color: var(--color-accent); }
+    .bg-accent { background-color: var(--color-accent); }
+    .text-dark { color: var(--color-dark); }
+    .bg-dark { background-color: var(--color-dark); }
+}
+
+.from-blue-900 {
+    --tw-gradient-from: #1e3a8a;
+}
+
+.to-blue-700 {
+    --tw-gradient-to: #1d4ed8;
+}

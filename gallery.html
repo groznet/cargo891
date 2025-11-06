@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru" x-data="{ 
-    mobileMenuOpen: false, 
-    servicesDropdownOpen: false, 
-    blogDropdownOpen: false,
-    currentLanguage: 'ru',
-    lightboxOpen: false,
-    currentImageIndex: 0,
-    galleryFilter: 'all'
+    mobileMenuOpen: false,
+    selectedImage: null,
+    sort: 'new'
   }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Галерея - Cargo891 - Логистика и доставка грузов из Китая</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1d4ed8',
-                        secondary: '#0e7490',
-                        accent: '#ea580c',
-                        dark: '#1f2937'
-                    }
-                }
-            }
-        }
-    </script>
+    
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/output.css">
     <style>
         .gallery-item {
             transition: all 0.3s ease;
-            cursor: pointer;
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
         }
         .gallery-item:hover {
             transform: translateY(-5px);
@@ -45,33 +29,19 @@
         .gallery-item:hover .gallery-image {
             transform: scale(1.05);
         }
-        .lightbox {
-            transition: opacity 0.3s ease;
-        }
-        .lightbox-content {
-            transition: transform 0.3s ease;
-        }
-        .filter-btn.active {
-            background-color: #1d4ed8;
-            color: white;
-        }
-        .masonry-grid {
+        .gallery-grid {
             column-count: 3;
             column-gap: 1.5rem;
         }
         @media (max-width: 1024px) {
-            .masonry-grid {
+            .gallery-grid {
                 column-count: 2;
             }
         }
         @media (max-width: 640px) {
-            .masonry-grid {
+            .gallery-grid {
                 column-count: 1;
             }
-        }
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -81,64 +51,33 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-r from-blue-800 to-primary" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+        <section class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-r from-blue-800 to-primary" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
             <!-- Gradient + SVG overlay -->
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>>
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
             <div class="absolute inset-0 opacity-20">
-                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
             </div>
             <div class="container mx-auto px-4 relative z-10">
-                <div class="text-center text-white">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Галерея</h1>
-                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Загляните за кулисы нашей работы: склады, процессы доставки, команда и успешные проекты</p>
-                    <div class="flex flex-wrap gap-4 justify-center">
-                        <a href="#gallery" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Смотреть галерею</a>
-                        <a href="#categories" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-6 rounded-lg transition-all duration-300">Категории</a>
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 text-center lg:text-left text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Галерея работ</h1>
+                        <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Посмотрите примеры наших успешных проектов по доставке грузов из Китая. Более 5000 реализованных заказов.</p>
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="#gallery" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Смотреть галерею</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Navigation -->
-        <section id="categories" class="py-8 bg-white shadow-sm">
-            <div class="container mx-auto px-4">
-                <h2 class="text-2xl font-bold text-center text-dark mb-6">Категории фотографий</h2>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button 
-                        @click="galleryFilter = 'all'" 
-                        :class="galleryFilter === 'all' ? 'filter-btn active' : 'filter-btn'"
-                        class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
-                    >
-                        Все фото
-                    </button>
-                    <button 
-                        @click="galleryFilter = 'warehouse'" 
-                        :class="galleryFilter === 'warehouse' ? 'filter-btn active' : 'filter-btn'"
-                        class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
-                    >
-                        Команда
-                    </button>
-                    <button 
-                        @click="galleryFilter = 'delivery'" 
-                        :class="galleryFilter === 'delivery' ? 'filter-btn active' : 'filter-btn'"
-                        class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
-                    >
-                        Доставка
-                    </button>
-                    <button 
-                        @click="galleryFilter = 'team'" 
-                        :class="galleryFilter === 'team' ? 'filter-btn active' : 'filter-btn'"
-                        class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
-                    >
-                        Склады
-                    </button>
-                    <button 
-                        @click="galleryFilter = 'process'" 
-                        :class="galleryFilter === 'process' ? 'filter-btn active' : 'filter-btn'"
-                        class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
-                    >
-                        Процессы
-                    </button>
+                    <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-primary rounded-xl opacity-20 blur-lg"></div>
+                            <div class="relative bg-white rounded-xl shadow-2xl p-8 max-w-md">
+                                <img src="assets/images/gallery/1.jpg" alt="Пример работы" class="w-full h-64 object-cover rounded-lg">
+                                <div class="mt-4 text-center">
+                                    <p class="font-bold text-dark">Доставка оборудования</p>
+                                    <p class="text-gray-500 text-sm">Из Шанхая в Москву</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -146,278 +85,101 @@
         <!-- Gallery Section -->
         <section id="gallery" class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <!-- Grid View -->
-                <div class="masonry-grid">
-                    <!-- Warehouse Images -->
-                    <template x-for="i in 4" :key="'warehouse-' + i">
-                        <div 
-                            class="masonry-item gallery-item rounded-xl overflow-hidden" 
-                            x-show="galleryFilter === 'all' || galleryFilter === 'warehouse'"
-                            @click="lightboxOpen = true; currentImageIndex = i - 1"
-                        >
-                            <div class="relative overflow-hidden">
-                                <div class="gallery-image h-64 bg-gray-200">
-                                    <img 
-                                        :src="'assets/images/gallery/' + i + '.jpg'" 
-                                        :alt="'Склад Cargo891 - фото ' + i"
-                                        class="w-full h-full object-cover"
-                                        @error="this.style.display='none'"
-                                    >
-                                </div>
-                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                                    <div class="text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                        <i class="fas fa-expand text-2xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-semibold text-dark mb-2">Склад Cargo891</h3>
-                                <p class="text-gray-600 text-sm">Современные складские помещения для хранения грузов</p>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Delivery Images -->
-                    <template x-for="i in 6" :key="'delivery-' + i">
-                        <div 
-                            class="masonry-item gallery-item rounded-xl overflow-hidden" 
-                            x-show="galleryFilter === 'all' || galleryFilter === 'delivery'"
-                            @click="lightboxOpen = true; currentImageIndex = 5 + i"
-                        >
-                            <div class="relative overflow-hidden">
-                                <div class="gallery-image h-64 bg-gray-200">
-                                    <img 
-                                        :src="'assets/images/gallery/' + (6 + i) + '.jpg'" 
-                                        :alt="'Процесс доставки - фото ' + i"
-                                        class="w-full h-full object-cover"
-                                        @error="this.style.display='none'"
-                                    >
-                                </div>
-                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                                    <div class="text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                        <i class="fas fa-expand text-2xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-semibold text-dark mb-2">Процесс доставки</h3>
-                                <p class="text-gray-600 text-sm">Организация логистики и транспортировки грузов</p>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Team Images -->
-                    <template x-for="i in 6" :key="'team-' + i">
-                        <div 
-                            class="masonry-item gallery-item rounded-xl overflow-hidden" 
-                            x-show="galleryFilter === 'all' || galleryFilter === 'team'"
-                            @click="lightboxOpen = true; currentImageIndex = 11 + i"
-                        >
-                            <div class="relative overflow-hidden">
-                                <div class="gallery-image h-64 bg-gray-200">
-                                    <img 
-                                        :src="'assets/images/gallery/' + (12 + i) + '.jpg'" 
-                                        :alt="'Наша команда - фото ' + i"
-                                        class="w-full h-full object-cover"
-                                        @error="this.style.display='none'"
-                                    >
-                                </div>
-                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                                    <div class="text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                        <i class="fas fa-expand text-2xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-semibold text-dark mb-2">Наша команда</h3>
-                                <p class="text-gray-600 text-sm">Профессионалы, обеспечивающие качественный сервис</p>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Process Images -->
-                    <template x-for="i in 6" :key="'process-' + i">
-                        <div 
-                            class="masonry-item gallery-item rounded-xl overflow-hidden" 
-                            x-show="galleryFilter === 'all' || galleryFilter === 'process'"
-                            @click="lightboxOpen = true; currentImageIndex = 17 + i"
-                        >
-                            <div class="relative overflow-hidden">
-                                <div class="gallery-image h-64 bg-gray-200">
-                                    <img 
-                                        :src="'assets/images/gallery/' + (18 + i) + '.jpg'" 
-                                        :alt="'Рабочие процессы - фото ' + i"
-                                        class="w-full h-full object-cover"
-                                        @error="this.style.display='none'"
-                                    >
-                                </div>
-                                <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                                    <div class="text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
-                                        <i class="fas fa-expand text-2xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-semibold text-dark mb-2">Рабочие процессы</h3>
-                                <p class="text-gray-600 text-sm">Организация и контроль логистических операций</p>
-                            </div>
-                        </div>
-                    </template>
+                <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Галерея работ</h2>
+                    <div class="flex justify-end md:mt-0">
+                        <select x-model="sort" 
+                                class="border border-gray-300 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="new">Сначала новые</option>
+                            <option value="old">Сначала старые</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Load More Button -->
-                <div class="text-center mt-12">
-                    <button class="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">
-                        Загрузить еще фото
-                    </button>
+                <div x-data="{
+                        images: [],
+                        selectedImage: null,
+                        sort: 'new',
+                        async init() {
+                            const res = await fetch('data/gallery.json');
+                            const data = await res.json();
+                            this.images = data.images;
+                        },
+                        get sortedImages() {
+                            return this.sort === 'new' 
+                                ? [...this.images].reverse() 
+                                : this.images;
+                        }
+                    }"
+                    class="gallery-grid relative">
+                    
+                    <template x-for="i in sortedImages" :key="i">
+                        <div class="gallery-item rounded-xl overflow-hidden cursor-pointer"
+                            @click="selectedImage = `assets/images/gallery/${i}.jpg`">
+                            <img :src="`assets/images/gallery/${i}.jpg`"
+                                :alt="`Пример работы ${i}`"
+                                class="w-full h-auto object-cover rounded-xl gallery-image">
+                        </div>
+                    </template>
+
+                    <!-- ✅ Lightbox moved inside same component -->
+                    <div x-show="selectedImage"
+                        x-transition
+                        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                        @click="selectedImage = null">
+                        <img :src="selectedImage" class="max-w-full max-h-full rounded-lg shadow-lg">
+                        <button class="absolute top-6 right-6 text-white text-3xl" 
+                                @click.stop="selectedImage = null">
+                            &times;
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="py-16 bg-gray-100">
+        <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                    <div class="bg-white rounded-xl p-6 text-center">
-                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">24+</div>
-                        <div class="text-gray-600">Фото в галерее</div>
-                    </div>
-                    <div class="bg-white rounded-xl p-6 text-center">
-                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">4</div>
-                        <div class="text-gray-600">Категории</div>
-                    </div>
-                    <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="bg-gray-50 rounded-xl p-6 text-center">
                         <div class="text-4xl md:text-5xl font-bold text-primary mb-2">5000+</div>
-                        <div class="text-gray-600">Успешных доставок</div>
+                        <div class="text-gray-600">Выполненных заказов</div>
                     </div>
-                    <div class="bg-white rounded-xl p-6 text-center">
-                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">10+</div>
-                        <div class="text-gray-600">Лет опыта</div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">98%</div>
+                        <div class="text-gray-600">В срок</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">99.8%</div>
+                        <div class="text-gray-600">Без повреждений</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">95%</div>
+                        <div class="text-gray-600">Постоянных клиентов</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-primary text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-6">Хотите увидеть больше?</h2>
-                <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8">Свяжитесь с нами для организации экскурсии на наши склады или получения дополнительной информации о наших услугах</p>
+        <section class="relative py-16 bg-primary text-white" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-blue-800 opacity-80"></div>
+
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-3xl font-bold mb-6 text-white">Хотите стать частью нашей галереи успеха?</h2>
+                <p class="text-xl text-white max-w-2xl mx-auto mb-8">Присоединяйтесь к тысячам предпринимателей, которые уже используют наши логистические услуги</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="/contact.html" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
-                    <a href="/services.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Наши услуги</a>
+                    <a href="/services.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
     <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
-
-    <!-- Lightbox -->
-    <div x-show="lightboxOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 lightbox" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
-        
-        <div class="relative max-w-4xl max-h-full mx-4">
-            <!-- Close Button -->
-            <button @click="lightboxOpen = false" class="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl z-10">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <!-- Navigation Buttons -->
-            <button @click="currentImageIndex = (currentImageIndex - 1 + 24) % 24" 
-                    class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-2xl z-10">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <button @click="currentImageIndex = (currentImageIndex + 1) % 24" 
-                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-2xl z-10">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-
-            <!-- Image -->
-            <div class="lightbox-content bg-white rounded-lg overflow-hidden">
-                <img :src="'assets/images/gallery/' + (currentImageIndex + 1) + '.jpg'" 
-                     :alt="'Фото галереи ' + (currentImageIndex + 1)"
-                     class="w-full h-auto max-h-[80vh] object-contain"
-                     @error="this.src='https://images.unsplash.com/photo-1563720223880-4d93eef1f1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
-                
-                <!-- Image Info -->
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold text-dark mb-2" x-text="getImageTitle(currentImageIndex)"></h3>
-                    <p class="text-gray-600" x-text="getImageDescription(currentImageIndex)"></p>
-                    <div class="flex justify-between items-center mt-4">
-                        <span class="text-sm text-gray-500" x-text="'Фото ' + (currentImageIndex + 1) + ' из 24'"></span>
-                        <div class="flex space-x-2">
-                            <button class="text-gray-500 hover:text-primary">
-                                <i class="far fa-heart"></i>
-                            </button>
-                            <button class="text-gray-500 hover:text-primary">
-                                <i class="fas fa-share"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <script src="assets/js/main.js"></script>
-    <script>
-        // Image data for lightbox
-        const imageData = [
-            { title: "Склад Cargo891", description: "Современные складские помещения для хранения грузов" },
-            { title: "Складская зона", description: "Организованное хранение товаров" },
-            { title: "Система хранения", description: "Современные стеллажные системы" },
-            { title: "Контроль качества", description: "Проверка товаров перед отправкой" },
-            { title: "Упаковочная зона", description: "Профессиональная упаковка грузов" },
-            { title: "Складские операции", description: "Эффективная организация рабочих процессов" },
-            { title: "Доставка грузов", description: "Подготовка к отправке" },
-            { title: "Транспортная логистика", description: "Организация перевозок" },
-            { title: "Международные перевозки", description: "Доставка из Китая" },
-            { title: "Контроль доставки", description: "Отслеживание грузов" },
-            { title: "Логистическая цепочка", description: "Оптимизация маршрутов" },
-            { title: "Транспортные средства", description: "Собственный автопарк" },
-            { title: "Команда специалистов", description: "Профессионалы логистики" },
-            { title: "Рабочий процесс", description: "Слаженная работа команды" },
-            { title: "Обучение сотрудников", description: "Постоянное развитие" },
-            { title: "Корпоративные мероприятия", description: "Сплоченный коллектив" },
-            { title: "Встречи с клиентами", description: "Индивидуальный подход" },
-            { title: "Профессиональный рост", description: "Развитие компетенций" },
-            { title: "Процесс упаковки", description: "Качественная подготовка грузов" },
-            { title: "Контроль качества", description: "Многоуровневая проверка" },
-            { title: "Складские операции", description: "Оптимизированные процессы" },
-            { title: "Логистические решения", description: "Инновационные подходы" },
-            { title: "Технологии в логистике", description: "Современное оборудование" },
-            { title: "Безопасность процессов", description: "Строгие стандарты качества" }
-        ];
-
-        function getImageTitle(index) {
-            return imageData[index]?.title || "Фото галереи";
-        }
-
-        function getImageDescription(index) {
-            return imageData[index]?.description || "Профессиональные логистические услуги Cargo891";
-        }
-
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', function(e) {
-            const lightbox = document.querySelector('[x-show="lightboxOpen"]');
-            if (lightbox && lightbox.style.display !== 'none') {
-                if (e.key === 'Escape') {
-                    Alpine.store('lightboxOpen', false);
-                } else if (e.key === 'ArrowLeft') {
-                    Alpine.store('currentImageIndex', (Alpine.store('currentImageIndex') - 1 + 24) % 24);
-                } else if (e.key === 'ArrowRight') {
-                    Alpine.store('currentImageIndex', (Alpine.store('currentImageIndex') + 1) % 24);
-                }
-            }
-        });
-    </script>
 </body>
 </html>

@@ -16,24 +16,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cargo891 - Логистика и доставка грузов из Китая</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1d4ed8',
-                        secondary: '#0e7490',
-                        accent: '#ea580c',
-                        dark: '#1f2937'
-                    }
-                }
-            }
-        }
-    </script>
+    
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/output.css">
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -42,8 +29,12 @@
     <main>
 
         <!-- Hero section -->
-        <section class="relative bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden" x-data="{ currentSlide: 0, slideTotal: 3, direction: 'right' }" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
-            <!-- Gradient + SVG overlay -->
+        <section
+        class="relative text-white overflow-hidden"
+        x-data="{ currentSlide: 0, slideTotal: 3, direction: 'right' }"
+        style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+        <!-- Overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-700 opacity-80"></div>            <!-- Gradient + SVG overlay -->
             <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
@@ -135,12 +126,12 @@
 
                 <!-- Slider controls -->
                 <div class="absolute inset-y-0 left-0 z-20 flex items-center pl-4">
-                    <button @click="currentSlide = (currentSlide - 1 + slideTotal) % slideTotal" class="bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none" aria-label="Предыдущий слайд">
+                    <button @click="currentSlide = (currentSlide - 1 + slideTotal) % slideTotal" class="bg-white/5 bg-opacity-10 hover:bg-opacity-20 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none" aria-label="Предыдущий слайд">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
                 </div>
                 <div class="absolute inset-y-0 right-0 z-20 flex items-center pr-4">
-                    <button @click="currentSlide = (currentSlide + 1) % slideTotal" class="bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none" aria-label="Следующий слайд">
+                    <button @click="currentSlide = (currentSlide + 1) % slideTotal" class="bg-white/5 bg-opacity-10 hover:bg-opacity-20 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none" aria-label="Следующий слайд">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
@@ -157,6 +148,36 @@
             <div x-init="setInterval(() => { currentSlide = (currentSlide + 1) % slideTotal }, 5000)"></div>
         </section>
         <!-- End: Hero section -->
+
+        <!-- Gallery Preview Section -->
+        <section class="py-16 bg-white" x-data="{
+                images: [],
+                async init() {
+                    const res = await fetch('data/gallery.json');
+                    const data = await res.json();
+                    this.images = data.images.slice(-3); // last 6 (newest)
+                }
+            }">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                    <h2 class="text-3xl font-bold text-dark mb-4 md:mb-0">Наши работы</h2>
+                    <a href='gallery.html'
+                    class="bg-primary text-white hover:bg-blue-800 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                        Смотреть всю галерею
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <template x-for="i in images" :key="i">
+                        <div class="rounded-xl overflow-hidden">
+                            <img :src="`assets/images/gallery/${i}.jpg`"
+                                :alt="`Пример работы ${i}`"
+                                class="w-full h-56 object-cover rounded-xl transition-transform duration-500 hover:scale-105">
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
 
         <!-- Testimonials -->
         <section class="py-16 testimonial-bg">
@@ -818,7 +839,7 @@
                                     </div>
                                     <div>
                                         <h4 class="text-lg font-medium text-dark">Телефон</h4>
-                                        <a href="tel:+8615174699042" class="text-gray-600 hover:text-primary">8 (615) 174-699-042</a>
+                                        <a href="tel:+8615174699042" class="text-gray-600 hover:text-primary">+8 (615) 174-699-042</a>
                                     </div>
                                 </div>
                                 
