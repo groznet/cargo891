@@ -15,6 +15,6 @@ function loadComponent(selector, url) {
 
 // Load header and footer
 document.addEventListener("DOMContentLoaded", () => {
-    loadComponent("#header-wrapper", "components/header.html");
-    loadComponent("#footer-wrapper", "components/footer.html");
+    loadComponent("#header-wrapper", "/components/header.html");
+    loadComponent("#footer-wrapper", "/components/footer.html");
 });

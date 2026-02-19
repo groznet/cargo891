@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru" x-data="{ 
+    mobileMenuOpen: false, 
+    servicesDropdownOpen: false, 
+    blogDropdownOpen: false,
+    currentLanguage: 'ru',
+    activeTestimonial: 0,
+    activeFaq: null,
+    teamMemberHover: null,
+    timelineTab: 'history'
+  }" 
+  x-init="
+    $watch('activeTestimonial', value => {
+      setInterval(() => activeTestimonial = (activeTestimonial + 1) % 3, 5000)
+    })
+  ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании - Cargo891 - Логистика и доставка грузов из Китая</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
+    <style>
+        .floating {
+            animation: floating 8s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .timeline-content {
+            transition: all 0.3s ease;
+        }
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header-wrapper" class="bg-white shadow-md sticky top-0 z-50"></header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-r from-blue-800 to-primary" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <!-- Gradient + SVG overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 text-center lg:text-left text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">О нашей компании</h1>
+                        <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Cargo891 — это надежный партнер в сфере логистики с 2012 года. Мы создаем современные решения для доставки грузов из Китая.</p>
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="#values" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Наши ценности</a>
+                            <a href="#team" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-6 rounded-lg transition-all duration-300">Наша команда</a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center floating">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-primary rounded-xl opacity-20 blur-lg"></div>
+                            <img src="/assets/images/warehouse.jpg" alt="Наш склад" class="relative rounded-xl shadow-2xl w-full max-w-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    <div class="stat-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">10+</div>
+                        <div class="text-gray-600">Лет на рынке</div>
+                    </div>
+                    <div class="stat-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">1000+</div>
+                        <div class="text-gray-600">Довольных клиентов</div>
+                    </div>
+                    <div class="stat-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">100+</div>
+                        <div class="text-gray-600">Тонн ежемесячно</div>
+                    </div>
+                    <div class="stat-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="text-4xl md:text-5xl font-bold text-primary mb-2">24/7</div>
+                        <div class="text-gray-600">Поддержка клиентов</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Наша миссия" class="rounded-xl shadow-lg w-full">
+                    </div>
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl font-bold text-dark mb-6">Наша миссия</h2>
+                        <p class="text-gray-600 mb-6">Мы стремимся стать самым надежным логистическим партнером для бизнеса, работающего с Китаем. Наша цель — сделать международные грузоперевозки простыми, предсказуемыми и эффективными.</p>
+                        <p class="text-gray-600 mb-8">Благодаря глубокому пониманию специфики китайского рынка и многолетнему опыту в логистике, мы предлагаем решения, которые экономят время и ресурсы наших клиентов.</p>
+                        <div class="bg-primary bg-opacity-10 border-l-4 border-primary p-4 rounded-r">
+                            <p class="text-dark italic">"Наша философия: каждый клиент заслуживает индивидуального подхода и максимальной прозрачности на всех этапах сотрудничества."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section id="values" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">Наши ценности</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Надежность</h3>
+                        <p class="text-gray-600">Мы соблюдаем сроки и гарантируем сохранность грузов. Наша репутация строится на выполнении обязательств.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Инновации</h3>
+                        <p class="text-gray-600">Мы постоянно внедряем новые технологии для оптимизации логистических процессов и улучшения сервиса.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-handshake text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Партнерство</h3>
+                        <p class="text-gray-600">Мы выстраиваем долгосрочные отношения с клиентами, основанные на взаимном уважении и доверии.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-tachometer-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Эффективность</h3>
+                        <p class="text-gray-600">Мы оптимизируем маршруты и процессы, чтобы предложить конкурентные цены без потери качества.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-globe text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Глобальность</h3>
+                        <p class="text-gray-600">Мы работаем по всему миру, объединяя возможности международной логистики с локальным подходом.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 group">
+                        <div class="bg-primary w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-4">Команда</h3>
+                        <p class="text-gray-600">Наша сила — в профессионалах, которые любят свое дело и постоянно развиваются в области логистики.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">Наша история</h2>
+                
+                <div class="flex justify-center mb-12">
+                    <div class="inline-flex rounded-md shadow-sm">
+                        <button @click="timelineTab = 'history'" :class="timelineTab === 'history' ? 'bg-primary text-white' : 'bg-white text-gray-700'" class="px-6 py-3 rounded-l-lg border border-gray-200 transition-colors duration-300">
+                            История
+                        </button>
+                        <button @click="timelineTab = 'milestones'" :class="timelineTab === 'milestones' ? 'bg-primary text-white' : 'bg-white text-gray-700'" class="px-6 py-3 border-t border-b border-gray-200 transition-colors duration-300">
+                            Достижения
+                        </button>
+                        <button @click="timelineTab = 'future'" :class="timelineTab === 'future' ? 'bg-primary text-white' : 'bg-white text-gray-700'" class="px-6 py-3 rounded-r-lg border border-gray-200 transition-colors duration-300">
+                            Планы
+                        </button>
+                    </div>
+                </div>
+                
+                <div x-show="timelineTab === 'history'" class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary opacity-20"></div>
+                    
+                    <div class="flex flex-col space-y-12">
+                        <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                            <div class="md:w-1/2 md:text-right md:pr-8 mb-4 md:mb-0 order-1 md:order-1">
+                                <h3 class="text-xl font-bold text-dark">Основание компании</h3>
+                                <p class="text-gray-600">2012</p>
+                                <p class="text-gray-600 mt-2">Cargo891 начала operations с небольшой команды и амбициозной цели — изменить представление о логистике из Китая.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold order-2">1</div>
+                            <div class="md:w-1/2 md:pl-8 order-3 md:order-3"></div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                            <div class="md:w-1/2 md:pr-8 order-1 md:order-3"></div>
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold order-2">2</div>
+                            <div class="md:w-1/2 md:text-left md:pl-8 mb-4 md:mb-0 order-3 md:order-1">
+                                <h3 class="text-xl font-bold text-dark">Расширение услуг</h3>
+                                <p class="text-gray-600">2015</p>
+                                <p class="text-gray-600 mt-2">Добавлены услуги складского хранения и консолидации грузов. Количество клиентов превысило 1000.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                            <div class="md:w-1/2 md:text-right md:pr-8 mb-4 md:mb-0 order-1 md:order-1">
+                                <h3 class="text-xl font-bold text-dark">Открытие офиса в Китае</h3>
+                                <p class="text-gray-600">2018</p>
+                                <p class="text-gray-600 mt-2">Прямое присутствие в Китае позволило улучшить контроль закупок и ускорить процессы обработки грузов.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold order-2">3</div>
+                            <div class="md:w-1/2 md:pl-8 order-3 md:order-3"></div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                            <div class="md:w-1/2 md:pr-8 order-1 md:order-3"></div>
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold order-2">4</div>
+                            <div class="md:w-1/2 md:text-left md:pl-8 mb-4 md:mb-0 order-3 md:order-1">
+                                <h3 class="text-xl font-bold text-dark">Цифровая трансформация</h3>
+                                <p class="text-gray-600">2021</p>
+                                <p class="text-gray-600 mt-2">Запуск собственной платформы для отслеживания грузов и автоматизации логистических процессов.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div x-show="timelineTab === 'milestones'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2014</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Первые 100 отправлений</h3>
+                        <p class="text-gray-600">Преодолен рубеж в 100 успешных доставок за год</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2016</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Сертификация ISO</h3>
+                        <p class="text-gray-600">Получен сертификат соответствия международным стандартам качества</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2019</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Премия "Логистический оператор года"</h3>
+                        <p class="text-gray-600">Награда за инновации в области международных перевозок</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2020</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">1000+ клиентов</h3>
+                        <p class="text-gray-600">База клиентов превысила 1000 компаний и предпринимателей</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2022</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Запуск eco-friendly инициатив</h3>
+                        <p class="text-gray-600">Внедрение экологичных решений в логистических процессах</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-4xl font-bold text-primary mb-4">2023</div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Расширение складских мощностей</h3>
+                        <p class="text-gray-600">Открытие нового склада площадью 5000 м² в Москве</p>
+                    </div>
+                </div>
+                
+                <div x-show="timelineTab === 'future'" class="text-center max-w-3xl mx-auto">
+                    <div class="bg-white rounded-xl p-8 shadow-sm">
+                        <h3 class="text-2xl font-bold text-dark mb-6">Наши планы на будущее</h3>
+                        <p class="text-gray-600 mb-6">Мы продолжаем развиваться и инвестировать в технологии, которые делают логистику проще и эффективнее для наших клиентов.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                    <i class="fas fa-robot text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark mb-1">Автоматизация</h4>
+                                    <p class="text-gray-600 text-sm">Внедрение AI для прогнозирования сроков доставки</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                    <i class="fas fa-leaf text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark mb-1">Экологичность</h4>
+                                    <p class="text-gray-600 text-sm">Переход на электромобили для городской доставки</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                    <i class="fas fa-expand text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark mb-1">Расширение</h4>
+                                    <p class="text-gray-600 text-sm">Открытие представительств в 5 новых странах</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                    <i class="fas fa-graduation-cap text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark mb-1">Образование</h4>
+                                    <p class="text-gray-600 text-sm">Запуск обучающей платформы по международной логистике</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-4">Наша команда</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Профессионалы с многолетним опытом в логистике, которые делают ваши грузоперевозки простыми и надежными</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 1" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/Яна.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Яна</h3>
+                            <p class="text-primary font-medium mb-2">Директор</p>
+                            <p class="text-gray-600 text-sm">15+ лет в международной логистике. Основала Cargo891 в 2012 году.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 2" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/Александр.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Александр</h3>
+                            <p class="text-primary font-medium mb-2">Генеральный директор</p>
+                            <p class="text-gray-600 text-sm">Руководитель по оптимизации логистических процессов.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 3" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/Настя.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Настя</h3>
+                            <p class="text-primary font-medium mb-2">Операционный менеджер</p>
+                            <p class="text-gray-600 text-sm">Менеджер по работе с клиентами и сопровождению логистических услуг.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 4" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/Андрей.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">Андрей</h3>
+                            <p class="text-primary font-medium mb-2">Специалист по упаковке</p>
+                            <p class="text-gray-600 text-sm">Специалист по упаковке, маркировке и подготовке грузов к отправке</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 4" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/MIAOMIAO.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">MIAOMIAO</h3>
+                            <p class="text-primary font-medium mb-2">Менеджер по закупкам</p>
+                            <p class="text-gray-600 text-sm">Специалист по поиску и выкупу товаров в Китае.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 4" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/HONGHONG.jpg" alt="Алексей Петров" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">HONGHONG</h3>
+                            <p class="text-primary font-medium mb-2">Менеджер по закупкам</p>
+                            <p class="text-gray-600 text-sm">Отвечает за поиск поставщиков и организацию закупок в Китае.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 relative" @mouseenter="teamMemberHover = 5" @mouseleave="teamMemberHover = null">
+                        <div class="h-64 bg-gray-200 relative">
+                            <img src="/assets/images/staff/ZHIFA.jpg" alt="ZHI FA" class="w-full h-full object-cover">
+                            <div class="team-overlay absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                                <div class="flex space-x-4">
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="#" class="text-white bg-black bg-opacity-30 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-colors duration-300">
+                                        <i class="fab fa-weixin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark">ZHI FA (Максим)</h3>
+                            <p class="text-primary font-medium mb-2">Упаковщик</p>
+                            <p class="text-gray-600 text-sm">Специалист по упаковке и подготовке грузов к отправке.</p>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="/contact/index.html" class="inline-flex items-center text-primary font-semibold hover:underline">
+                        Присоединиться к нашей команде
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative py-16 bg-primary text-white" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-blue-800 opacity-80"></div>
+
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-3xl font-bold mb-6 text-white">Готовы начать работать с нами?</h2>
+                <p class="text-xl text-white max-w-2xl mx-auto mb-8">Присоединяйтесь к тысячам довольных клиентов, которые уже используют наши логистические услуги</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact/index.html" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
+                    <a href="/services/index.html" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
+    
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

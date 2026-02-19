@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru" x-data="{ 
+    mobileMenuOpen: false, 
+    servicesDropdownOpen: false, 
+    blogDropdownOpen: false,
+    currentLanguage: 'ru',
+    activeCategory: 'all',
+    searchQuery: '',
+    currentPage: 1,
+    itemsPerPage: 6
+  }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог - Cargo891 - Логистика и доставка грузов из Китая</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
+    <style>
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .category-btn.active {
+            background-color: #1d4ed8;
+            color: white;
+        }
+        .pagination-btn.active {
+            background-color: #1d4ed8;
+            color: white;
+        }
+        .article-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .article-content.open {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header-wrapper" class="bg-white shadow-md sticky top-0 z-50"></header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-r from-blue-800 to-primary" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            <!-- Gradient + SVG overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center text-white">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Блог о логистике</h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Полезные статьи, новости и insights о международной логистике, доставке из Китая и ведении бизнеса</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="max-w-2xl mx-auto relative">
+                        <input 
+                            type="text" 
+                            x-model="searchQuery" 
+                            placeholder="Поиск по статьям..." 
+                            class="w-full border-0 rounded-full py-4 px-6 text-dark focus:outline-none focus:ring-2 focus:ring-primary shadow-lg"
+                        >
+                        <button class="absolute right-2 top-2 bg-primary text-white p-2 rounded-full">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Content -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <!-- Main Content -->
+                    <div class="lg:w-8/12">
+                        <!-- Category Filters -->
+                        <div class="flex flex-wrap gap-3 mb-10">
+                            <button 
+                                @click="activeCategory = 'all'" 
+                                :class="activeCategory === 'all' ? 'category-btn active' : 'category-btn'"
+                                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
+                            >
+                                Все статьи
+                            </button>
+                            <button 
+                                @click="activeCategory = 'logistics'" 
+                                :class="activeCategory === 'logistics' ? 'category-btn active' : 'category-btn'"
+                                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
+                            >
+                                Логистика
+                            </button>
+                            <button 
+                                @click="activeCategory = 'china'" 
+                                :class="activeCategory === 'china' ? 'category-btn active' : 'category-btn'"
+                                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
+                            >
+                                Китай
+                            </button>
+                            <button 
+                                @click="activeCategory = 'business'" 
+                                :class="activeCategory === 'business' ? 'category-btn active' : 'category-btn'"
+                                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
+                            >
+                                Бизнес
+                            </button>
+                            <button 
+                                @click="activeCategory = 'news'" 
+                                :class="activeCategory === 'news' ? 'category-btn active' : 'category-btn'"
+                                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-300"
+                            >
+                                Новости
+                            </button>
+                        </div>
+
+                        <!-- Featured Article -->
+                        <div class="blog-card bg-gray-50 rounded-xl overflow-hidden mb-12 transition-all duration-300">
+                            <div class="h-64 bg-gray-200 relative">
+                                <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-primary text-white text-sm font-semibold py-1 px-3 rounded-full">Логистика</span>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <div class="flex items-center text-gray-500 text-sm mb-4">
+                                    <span><i class="far fa-calendar mr-2"></i>12 мая 2023</span>
+                                    <span class="mx-3">•</span>
+                                    <span><i class="far fa-clock mr-2"></i>5 мин чтения</span>
+                                </div>
+                                <h2 class="text-2xl font-bold text-dark mb-4">Как оптимизировать логистическую цепочку поставок из Китая в 2023 году</h2>
+                                <p class="text-gray-600 mb-6">В статье рассматриваются современные подходы к оптимизации логистических процессов, которые помогут сократить издержки и ускорить доставку грузов из Китая. Мы расскажем о ключевых трендах и технологиях...</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium text-dark">Анна Иванова</p>
+                                            <p class="text-xs text-gray-500">Логист-эксперт</p>
+                                        </div>
+                                    </div>
+                                    <a href="/blog/optimize-logistics-2023" class="text-primary font-semibold hover:underline inline-flex items-center">
+                                        Читать далее
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Articles Grid -->
+                        <h3 class="text-2xl font-bold text-dark mb-8">Последние статьи</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                            <!-- Article 1 -->
+                            <div class="blog-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300">
+                                <div class="h-48 bg-gray-200 relative">
+                                    <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="bg-accent text-white text-sm font-semibold py-1 px-3 rounded-full">Китай</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center text-gray-500 text-sm mb-3">
+                                        <span><i class="far fa-calendar mr-2"></i>8 мая 2023</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-dark mb-3">Изменения в таможенном законодательстве Китая в 2023 году</h3>
+                                    <p class="text-gray-600 mb-4">Обзор последних изменений в таможенных процедурах Китая, которые влияют на международные грузоперевозки...</p>
+                                    <a href="/blog/china-customs-2023" class="text-primary font-semibold hover:underline inline-flex items-center text-sm">
+                                        Читать далее
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Article 2 -->
+                            <div class="blog-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300">
+                                <div class="h-48 bg-gray-200 relative">
+                                    <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="bg-secondary text-white text-sm font-semibold py-1 px-3 rounded-full">Бизнес</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center text-gray-500 text-sm mb-3">
+                                        <span><i class="far fa-calendar mr-2"></i>3 мая 2023</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-dark mb-3">Как выбрать надежного поставщика в Китае: руководство 2023</h3>
+                                    <p class="text-gray-600 mb-4">Подробное руководство по выбору поставщиков в Китае с проверенными методами проверки и критериями отбора...</p>
+                                    <a href="/blog/choose-china-supplier" class="text-primary font-semibold hover:underline inline-flex items-center text-sm">
+                                        Читать далее
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Article 3 -->
+                            <div class="blog-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300">
+                                <div class="h-48 bg-gray-200 relative">
+                                    <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="bg-primary text-white text-sm font-semibold py-1 px-3 rounded-full">Логистика</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center text-gray-500 text-sm mb-3">
+                                        <span><i class="far fa-calendar mr-2"></i>28 апреля 2023</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-dark mb-3">Авиадоставка vs Морские перевозки: что выбрать в 2023?</h3>
+                                    <p class="text-gray-600 mb-4">Сравнительный анализ двух основных способов доставки грузов из Китая: плюсы, минусы и рекомендации по выбору...</p>
+                                    <a href="/blog/air-vs-sea-shipping" class="text-primary font-semibold hover:underline inline-flex items-center text-sm">
+                                        Читать далее
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Article 4 -->
+                            <div class="blog-card bg-gray-50 rounded-xl overflow-hidden transition-all duration-300">
+                                <div class="h-48 bg-gray-200 relative">
+                                    <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    <div class="absolute top-4 left-4">
+                                        <span class="bg-green-600 text-white text-sm font-semibold py-1 px-3 rounded-full">Новости</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center text-gray-500 text-sm mb-3">
+                                        <span><i class="far fa-calendar mr-2"></i>22 апреля 2023</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-dark mb-3">Новые логистические маршруты из Китая в Россию: обзор</h3>
+                                    <p class="text-gray-600 mb-4">Анализ новых транспортных маршрутов, открывшихся в 2023 году, и их преимущества для импортеров...</p>
+                                    <a href="/blog/new-shipping-routes" class="text-primary font-semibold hover:underline inline-flex items-center text-sm">
+                                        Читать далее
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="flex justify-center">
+                            <div class="inline-flex rounded-md shadow-sm">
+                                <button class="pagination-btn px-4 py-2 rounded-l-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="pagination-btn active px-4 py-2 border-t border-b border-gray-300 bg-primary text-white">1</button>
+                                <button class="pagination-btn px-4 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">2</button>
+                                <button class="pagination-btn px-4 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">3</button>
+                                <button class="pagination-btn px-4 py-2 rounded-r-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="lg:w-4/12">
+                        <!-- About Blog -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <h3 class="text-xl font-bold text-dark mb-4">О блоге</h3>
+                            <p class="text-gray-600 mb-4">В нашем блоге мы делимся экспертизой в области международной логистики, доставки из Китая и ведения бизнеса.</p>
+                            <p class="text-gray-600">Подписывайтесь на обновления, чтобы не пропустить новые статьи!</p>
+                        </div>
+
+                        <!-- Subscribe Form -->
+                        <div class="bg-primary rounded-xl p-6 mb-8 text-white">
+                            <h3 class="text-xl font-bold mb-4">Подписаться на рассылку</h3>
+                            <p class="text-blue-100 mb-4">Получайте полезные статьи и новости из мира логистики на email</p>
+                            <form class="space-y-4">
+                                <div>
+                                    <input type="email" placeholder="Ваш email" class="w-full border-0 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                </div>
+                                <button type="submit" class="w-full bg-white text-primary font-bold py-3 px-4 rounded-lg transition duration-300 hover:bg-blue-50">
+                                    Подписаться
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Popular Posts -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <h3 class="text-xl font-bold text-dark mb-4">Популярные статьи</h3>
+                            <div class="space-y-4">
+                                <a href="#" class="flex items-start group">
+                                    <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                                        <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark group-hover:text-primary transition-colors duration-300">Как снизить расходы на доставку из Китая</h4>
+                                        <p class="text-gray-500 text-sm">12 апреля 2023</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-start group">
+                                    <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                                        <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark group-hover:text-primary transition-colors duration-300">Топ-5 ошибок при работе с китайскими поставщиками</h4>
+                                        <p class="text-gray-500 text-sm">5 апреля 2023</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-start group">
+                                    <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                                        <img src="/assets/images/post-image.jpg" alt="Как оптимизировать логистическую цепочку поставок" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark group-hover:text-primary transition-colors duration-300">Как правильно упаковывать товары для международной доставки</h4>
+                                        <p class="text-gray-500 text-sm">28 марта 2023</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <h3 class="text-xl font-bold text-dark mb-4">Категории</h3>
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="#" class="flex justify-between text-gray-700 hover:text-primary transition-colors duration-300">
+                                        <span>Логистика</span>
+                                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">24</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex justify-between text-gray-700 hover:text-primary transition-colors duration-300">
+                                        <span>Китай</span>
+                                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">18</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex justify-between text-gray-700 hover:text-primary transition-colors duration-300">
+                                        <span>Бизнес</span>
+                                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">15</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex justify-between text-gray-700 hover:text-primary transition-colors duration-300">
+                                        <span>Новости</span>
+                                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">9</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex justify-between text-gray-700 hover:text-primary transition-colors duration-300">
+                                        <span>Таможня</span>
+                                        <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">7</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-dark mb-4">Теги</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">доставка</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">Китай</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">логистика</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">поставщики</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">таможня</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">перевозки</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">склад</a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300">авиадоставка</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-dark mb-6">Нужна консультация по логистике?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Наши эксперты готовы ответить на ваши вопросы и помочь с организацией доставки из Китая</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact/index.html" class="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Связаться с нами</a>
+                    <a href="/services/index.html" class="border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300">Посмотреть услуги</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
+    
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru" x-data="{ 
+    mobileMenuOpen: false, 
+    servicesDropdownOpen: false, 
+    blogDropdownOpen: false,
+    currentLanguage: 'ru',
+    activeTestimonial: 0,
+    activeFaq: null,
+    contactForm: {
+      name: '',
+      email: '',
+      phone: '',
+      service: '',
+      message: ''
+    },
+    formSubmitted: false,
+    formErrors: {}
+  }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Cargo891 - Логистика и доставка грузов из Китая</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
+    <style>
+        .floating {
+            animation: floating 8s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .map-container {
+            filter: grayscale(0.2) contrast(1.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header-wrapper" class="bg-white shadow-md sticky top-0 z-50"></header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-r from-blue-800 to-primary"
+                style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            
+            <!-- Gradient + SVG overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-800 to-primary opacity-80"></div>
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 text-center lg:text-left text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Свяжитесь с нами</h1>
+                        <p class="text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">Готовы ответить на все ваши вопросы о логистике и доставке грузов из Китая. Наша команда экспертов к вашим услугам.</p>
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="#contact-form" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Написать нам</a>
+                            <a href="#offices" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-6 rounded-lg transition-all duration-300">Наши офисы</a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center floating">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-primary rounded-xl opacity-20 blur-lg"></div>
+                            <img src="/assets/images/contact-us-image.jpg" alt="Наша команда" class="relative rounded-xl shadow-2xl w-full max-w-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Cards Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="contact-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-phone-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Телефон</h3>
+                        <p class="text-gray-600 mb-2">+8 (615) 174-699-042</p>
+                        <p class="text-gray-600 text-sm">Бесплатно по России</p>
+                    </div>
+                    
+                    <div class="contact-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Email</h3>
+                        <p class="text-gray-600 mb-2">smlw201314@163.com</p>
+                        <p class="text-gray-600 text-sm">Для общих вопросов</p>
+                    </div>
+                    
+                    <div class="contact-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Часы работы</h3>
+                        <p class="text-gray-600 mb-2">Пн-Пт: 9:00-18:00</p>
+                        <p class="text-gray-600 text-sm">Сб-Вс: по договоренности</p>
+                    </div>
+                    
+                    <div class="contact-card bg-gray-50 rounded-xl p-6 text-center transition-all duration-300">
+                        <div class="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-comment-dots text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Мессенджеры</h3>
+                        <p class="text-gray-600 mb-2">WhatsApp, Telegram</p>
+                        <p class="text-gray-600 text-sm">Быстрая связь</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form & Info Section -->
+        <section class="py-16 bg-gray-100" id="contact-form">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-4">Напишите нам</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Заполните форму ниже, и наш специалист свяжется с вами в течение рабочего дня</p>
+                
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <!-- Contact Form -->
+                    <div class="lg:w-2/3">
+                        <div x-show="!formSubmitted" class="bg-white rounded-xl p-8 shadow-sm">
+                            <form @submit.prevent="
+                                formErrors = {};
+                                if(!contactForm.name) formErrors.name = 'Обязательное поле';
+                                if(!contactForm.email) formErrors.email = 'Обязательное поле';
+                                if(!contactForm.message) formErrors.message = 'Обязательное поле';
+                                
+                                if(Object.keys(formErrors).length === 0) {
+                                    // Here would be the form submission logic
+                                    formSubmitted = true;
+                                }
+                            ">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label for="name" class="block text-dark font-medium mb-2">Ваше имя *</label>
+                                        <input 
+                                            type="text" 
+                                            id="name" 
+                                            x-model="contactForm.name"
+                                            class="w-full border rounded-lg py-3 px-4 form-input focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                            :class="formErrors.name ? 'border-red-500' : 'border-gray-300'"
+                                        >
+                                        <p x-show="formErrors.name" class="text-red-500 text-sm mt-1" x-text="formErrors.name"></p>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="email" class="block text-dark font-medium mb-2">Email *</label>
+                                        <input 
+                                            type="email" 
+                                            id="email" 
+                                            x-model="contactForm.email"
+                                            class="w-full border rounded-lg py-3 px-4 form-input focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                            :class="formErrors.email ? 'border-red-500' : 'border-gray-300'"
+                                        >
+                                        <p x-show="formErrors.email" class="text-red-500 text-sm mt-1" x-text="formErrors.email"></p>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="phone" class="block text-dark font-medium mb-2">Телефон</label>
+                                        <input 
+                                            type="tel" 
+                                            id="phone" 
+                                            x-model="contactForm.phone"
+                                            class="w-full border border-gray-300 rounded-lg py-3 px-4 form-input focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                        >
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="service" class="block text-dark font-medium mb-2">Интересующая услуга</label>
+                                        <select 
+                                            id="service" 
+                                            x-model="contactForm.service"
+                                            class="w-full border border-gray-300 rounded-lg py-3 px-4 form-input focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                        >
+                                            <option value="">Выберите услугу</option>
+                                            <option value="delivery">Доставка из Китая</option>
+                                            <option value="storage">Складирование</option>
+                                            <option value="purchasing">Выкуп товаров</option>
+                                            <option value="money-transfer">Денежные переводы</option>
+                                            <option value="other">Другое</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <label for="message" class="block text-dark font-medium mb-2">Сообщение *</label>
+                                    <textarea 
+                                        id="message" 
+                                        rows="5" 
+                                        x-model="contactForm.message"
+                                        class="w-full border rounded-lg py-3 px-4 form-input focus:outline-none focus:ring-2 focus:ring-primary transition duration-300"
+                                        :class="formErrors.message ? 'border-red-500' : 'border-gray-300'"
+                                    ></textarea>
+                                    <p x-show="formErrors.message" class="text-red-500 text-sm mt-1" x-text="formErrors.message"></p>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                                    Отправить сообщение
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div x-show="formSubmitted" class="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+                            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-check text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark mb-4">Сообщение отправлено!</h3>
+                            <p class="text-gray-600 mb-6">Спасибо за ваше сообщение. Наш специалист свяжется с вами в течение рабочего дня.</p>
+                            <button @click="formSubmitted = false; contactForm = {}" class="text-primary font-semibold hover:underline">
+                                Отправить еще одно сообщение
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="lg:w-1/3">
+                        <div class="bg-white rounded-xl p-8 shadow-sm mb-8">
+                            <h3 class="text-xl font-bold text-dark mb-6">Контактная информация</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                        <i class="fas fa-map-marker-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark mb-1">Адрес</h4>
+                                        <p class="text-gray-600">г. Москва, Россия</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                        <i class="fas fa-phone-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark mb-1">Телефон</h4>
+                                        <p class="text-gray-600">+8 (615) 174-699-042</p>
+                                        <p class="text-gray-600 text-sm">Бесплатно по России</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                        <i class="fas fa-envelope text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark mb-1">Email</h4>
+                                        <p class="text-gray-600">smlw201314@163.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary bg-opacity-10 rounded-full p-3 mr-4">
+                                        <i class="fas fa-clock text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark mb-1">Часы работы</h4>
+                                        <p class="text-gray-600">Понедельник - Пятница: 9:00 - 18:00</p>
+                                        <p class="text-gray-600">Суббота - Воскресенье: по договоренности</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-8 shadow-sm">
+                            <h3 class="text-xl font-bold text-dark mb-6">Мы в мессенджерах, сканируй QR-код </h3>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-bold text-dark mb-3"></h4>
+                                <div class="flex space-x-6">
+                                    <div class="text-center">
+                                        <img src="/assets/images/WhatsApp-QR-Code.png" alt="WhatsApp QR Code" class="w-32 h-32 mx-auto mb-2">
+                                        <span class="text-gray-600">WhatsApp</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="/assets/images/WeChat-QR-Code.png" alt="WeChat QR Code" class="w-32 h-32 mx-auto mb-2">
+                                        <span class="text-gray-600">WeChat</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offices Section -->
+        <section id="offices" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-4">Наши офисы</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Мы имеем представительства в ключевых логистических центрах для вашего удобства</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <!-- Moscow Office -->
+                    <div class="bg-gray-50 rounded-xl p-8">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Москва</h3>
+                                <p class="text-gray-600">Главный офис</p>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 rounded-full p-3">
+                                <i class="fas fa-building text-primary"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">г. Москва, ул. Россия</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">+7 (495) 123-45-67</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">Пн-Пт: 9:00-18:00</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center text-primary font-semibold hover:underline">
+                            Построить маршрут
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Yiwu Office -->
+                    <div class="bg-gray-50 rounded-xl p-8">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Иу (Китай)</h3>
+                                <p class="text-gray-600">Азиатское представительство</p>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 rounded-full p-3">
+                                <i class="fas fa-warehouse text-primary"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">Yiwu City, Zhejiang Province, China</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">+86 579 8555 1234</p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-primary mt-1 mr-3"></i>
+                                <p class="text-gray-600">Пн-Сб: 8:00-17:00 (по пекинскому времени)</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center text-primary font-semibold hover:underline">
+                            Связаться с офисом
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Map -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold text-dark mb-6">Мы на карте</h3>
+                    <div class="map-container h-96 bg-gray-200 rounded-lg overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43807.81511014273!2d119.9996815!3d29.3150616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x344b78a0dc77f97f%3A0x7e13ecacddf90f71!2sYiwu%2C%20Jinhua%2C%20Zhejiang%2C%20China!5e0!3m2!1sen!2s!4v1693935555555!5m2!1sen!2s"width="100%"height="100%"style="border:0;"allowfullscreen=""loading="lazy"referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-dark mb-4">Частые вопросы</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Ответы на наиболее распространенные вопросы о наших услугах и сотрудничестве</p>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-sm">
+                        <div class="border-b">
+                            <button @click="activeFaq = activeFaq === 1 ? null : 1" class="flex justify-between items-center w-full py-5 px-6 text-left">
+                                <span class="text-lg font-medium text-dark">Как быстро вы отвечаете на запросы?</span>
+                                <i class="fas" :class="activeFaq === 1 ? 'fa-minus' : 'fa-plus'"></i>
+                            </button>
+                            <div x-show="activeFaq === 1" x-collapse class="pb-5 px-6 text-gray-600">
+                                <p>Мы стремимся отвечать на все запросы в течение 1 рабочего дня. На запросы, поступившие до 15:00 по московскому времени, мы обычно отвечаем в тот же день.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b">
+                            <button @click="activeFaq = activeFaq === 2 ? null : 2" class="flex justify-between items-center w-full py-5 px-6 text-left">
+                                <span class="text-lg font-medium text-dark">Нужно ли заключать договор для разовой поставки?</span>
+                                <i class="fas" :class="activeFaq === 2 ? 'fa-minus' : 'fa-plus'"></i>
+                            </button>
+                            <div x-show="activeFaq === 2" x-collapse class="pb-5 px-6 text-gray-600">
+                                <p>Да, мы заключаем договор на каждую поставку, независимо от ее объема. Это гарантирует прозрачность условий и защищает интересы обеих сторон.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b">
+                            <button @click="activeFaq = activeFaq === 3 ? null : 3" class="flex justify-between items-center w-full py-5 px-6 text-left">
+                                <span class="text-lg font-medium text-dark">Можно ли посетить ваш склад в Китае?</span>
+                                <i class="fas" :class="activeFaq === 3 ? 'fa-minus' : 'fa-plus'"></i>
+                            </button>
+                            <div x-show="activeFaq === 3" x-collapse class="pb-5 px-6 text-gray-600">
+                                <p>Конечно! Мы организуем для вас экскурсию на наш склад в Иу. Необходимо заранее согласовать визит с нашим менеджером для подготовки пропусков и организации встречи.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b">
+                            <button @click="activeFaq = activeFaq === 4 ? null : 4" class="flex justify-between items-center w-full py-5 px-6 text-left">
+                                <span class="text-lg font-medium text-dark">Предоставляете ли вы услуги таможенного оформления?</span>
+                                <i class="fas" :class="activeFaq === 4 ? 'fa-minus' : 'fa-plus'"></i>
+                            </button>
+                            <div x-show="activeFaq === 4" x-collapse class="pb-5 px-6 text-gray-600">
+                                <p>Да, мы предоставляем полный комплекс услуг таможенного оформления. Наши специалисты имеют большой опыт работы с таможенными органами и помогут минимизировать риски и сроки оформления.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <button @click="activeFaq = activeFaq === 5 ? null : 5" class="flex justify-between items-center w-full py-5 px-6 text-left">
+                                <span class="text-lg font-medium text-dark">Как происходит оплата ваших услуг?</span>
+                                <i class="fas" :class="activeFaq === 5 ? 'fa-minus' : 'fa-plus'"></i>
+                            </button>
+                            <div x-show="activeFaq === 5" x-collapse class="pb-5 px-6 text-gray-600">
+                                <p>Мы предлагаем гибкие условия оплаты. Стандартная схема включает 30% предоплату и 70% после прибытия груза на склад в России. Также возможны индивидуальные условия для постоянных клиентов.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <a href="/faq" class="inline-flex items-center text-primary font-semibold hover:underline">
+                            Смотреть все вопросы
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative py-16 bg-primary text-white" style="background-image: url('assets/images/header-bg.jpg'); background-size: cover; background-position: center;">
+            
+            <!-- Blue overlay -->
+            <div class="absolute inset-0 bg-blue-800 opacity-80"></div>
+            
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-3xl font-bold mb-6">Остались вопросы?</h2>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8">Наши специалисты готовы проконсультировать вас по всем вопросам логистики и доставки из Китая</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact-form" class="bg-white text-primary hover:bg-blue-50 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">Написать нам</a>
+                    <a href="tel:+78001234567" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">Позвонить</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-wrapper" class="bg-dark text-white py-12"></footer>
+    
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

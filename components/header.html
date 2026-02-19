@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a href="/" class="flex items-center space-x-3">
-        <img src="assets/images/logo.png" alt="Cargo891" class="h-14">
+        <img src="/assets/images/logo.png" alt="Cargo891" class="h-14">
         <div class="flex flex-col leading-tight">
             <span class="font-bold text-xl text-dark"><span class="text-[#1d4ed8]">Cargo</span>891</span>
             <span class="text-sm text-gray-600">Логистическая компания</span>
@@ -17,26 +17,26 @@
                 <i class="ml-1 fas" :class="servicesDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </button>
             <div x-show="servicesDropdownOpen" @click.away="servicesDropdownOpen = false" class="absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
-                <a href="/services.html#shipping" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Доставка</a>
-                <a href="/services.html#storage" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Хранение</a>
-                <a href="/services.html#product-search" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Поиск товара</a>
-                <a href="/services.html#factory-finding" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Найти фабрику</a>
-                <a href="/services.html" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Все услуги</a>
+                <a href="/services/#shipping" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Доставка</a>
+                <a href="/services/#storage" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Хранение</a>
+                <a href="/services/#product-search" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Поиск товара</a>
+                <a href="/services/#factory-finding" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Найти фабрику</a>
+                <a href="/services" class="block px-4 py-2 text-sm text-dark hover:bg-blue-50">Все услуги</a>
             </div>
         </div>
-        <a href="/gallery.html" class="text-dark hover:text-primary font-medium">Галерея</a>
-        <a href="/blog.html" class="text-dark hover:text-primary font-medium">Новости</a>
-        <a href="/reviews.html" class="text-dark hover:text-primary font-medium">Отзывы</a>
+        <a href="/gallery" class="text-dark hover:text-primary font-medium">Галерея</a>
+        <a href="/blog" class="text-dark hover:text-primary font-medium">Новости</a>
+        <a href="/reviews" class="text-dark hover:text-primary font-medium">Отзывы</a>
         <!-- <a href="/pricing.html" class="text-dark hover:text-primary font-medium">Цены</a> -->
-        <a href="/about.html" class="text-dark hover:text-primary font-medium">О нас</a>
-        <a href="/contact.html" class="text-dark hover:text-primary font-medium">Контакты</a>
+        <a href="/about" class="text-dark hover:text-primary font-medium">О нас</a>
+        <a href="/contact" class="text-dark hover:text-primary font-medium">Контакты</a>
     </nav>
 
     <div class="hidden lg:flex items-center space-x-4">
         <div class="relative">
             <input type="text" placeholder="Поиск..." class="border rounded-full py-1 px-4 text-sm w-40 focus:outline-none focus:ring-2 focus:ring-primary">
             <button class="absolute right-2 top-1.5 text-gray-400">
-                <a href="/blog.html"><i class="fas fa-search"></i></a>
+                <a href="/blog"><i class="fas fa-search"></i></a>
             </button>
         </div>
 
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <a href="/contact.html" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
+        <a href="/contact" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
             Связаться
         </a>
     </div>
@@ -67,7 +67,7 @@
     <div class="p-4">
         <div class="flex justify-between items-center mb-8">
             <a href="/" class="flex items-center space-x-3">
-                <img src="assets/images/logo.png" alt="Cargo891" class="h-14">
+                <img src="/assets/images/logo.png" alt="Cargo891" class="h-14">
                 <div class="flex flex-col leading-tight">
                     <span class="font-bold text-xl text-dark">Cargo<span class="text-[#1d4ed8]">891</span></span>
                     <span class="text-sm text-gray-600">Логистическая компания</span>
@@ -85,19 +85,19 @@
                     <i class="fas" :class="servicesDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                 </button>
                 <div x-show="servicesDropdownOpen" class="pl-4 mt-2 space-y-3">
-                    <a href="/services.html#shipping" class="block py-2 text-dark">Доставка из Китая</a>
-                    <a href="/services.html#storage" class="block py-2 text-dark">Хранение</a>
-                    <a href="/services.html#product-search" class="block py-2 text-dark">Поиск и выкуп товара</a>
-                    <a href="/services.html#factory-finding" class="block py-2 text-dark">Найти фабрику</a>
-                    <a href="/services.html" class="block py-2 text-dark">Все услуги <i class="fas fa-chevron-right text-sm"></i></a>
+                    <a href="/services/#shipping" class="block py-2 text-dark">Доставка из Китая</a>
+                    <a href="/services/#storage" class="block py-2 text-dark">Хранение</a>
+                    <a href="/services/#product-search" class="block py-2 text-dark">Поиск и выкуп товара</a>
+                    <a href="/services/#factory-finding" class="block py-2 text-dark">Найти фабрику</a>
+                    <a href="/services" class="block py-2 text-dark">Все услуги <i class="fas fa-chevron-right text-sm"></i></a>
                 </div>
             </div>
 
-            <a href="/blog.html" class="block mt-2 text-lg font-medium py-2 border-b">Новости</a>
-            <a href="/reviews.html" class="block mt-2 text-lg font-medium py-2 border-b">Отзывы</a>
+            <a href="/blog" class="block mt-2 text-lg font-medium py-2 border-b">Новости</a>
+            <a href="/reviews" class="block mt-2 text-lg font-medium py-2 border-b">Отзывы</a>
             <a href="/pricing" class="block mt-2 text-lg font-medium py-2 border-b">Цены</a>
             <a href="/about" class="block mt-2 text-lg font-medium py-2 border-b">О нас</a>
-            <a href="/contact.html" class="block mt-2 text-lg font-medium py-2 border-b">Контакты</a>
+            <a href="/contact" class="block mt-2 text-lg font-medium py-2 border-b">Контакты</a>
 
             <div class="pt-4">
                 <div class="relative mb-4">
@@ -115,7 +115,7 @@
                         </button>
                     </div>
 
-                    <a href="/contact.html" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
+                    <a href="/contact" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
                         Связаться
                     </a>
                 </div>
